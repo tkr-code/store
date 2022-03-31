@@ -19,7 +19,7 @@ class LoginRolesSuscriberSubscriber implements EventSubscriberInterface
     {
         $user  = $event->getUser();
         if(in_array('ROLE_CLIENT', $user->getRoles())){
-            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('client_index')));
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('home')));
         }
     }
 

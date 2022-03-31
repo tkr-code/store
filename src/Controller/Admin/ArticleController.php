@@ -70,6 +70,14 @@ class ArticleController extends AbstractController
             $action = 'Save';
             $action_text = 'Create new ';
             $article = new Article();
+            $article
+                ->setTitle('Toshiba portege')
+                ->setDescription('Description toshiba portege')
+                ->setQuantity(5)->setQuantityMin(3)
+                ->setRef('AR_'.rand(0,100))
+                ->setEnabled(true)
+                ->setIsExpiry(false)
+                ->setPrice(120000)->setBuyingPrice(150000);
             $formOption = null;
         }else{
                 $articleOption = new ArticleOption();

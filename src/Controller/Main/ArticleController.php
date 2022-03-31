@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Main;
 
 use App\Entity\Article;
 use App\Entity\ArticleSearch;
@@ -18,12 +18,12 @@ class ArticleController extends AbstractController
     /**
      * @Route("articles/{category}/{slug}/{id}", name="articles_show", requirements={"slug": "[a-z0-9\-]*"} )
      */
-    public function articleshow(Article $article,string $category, string $slug, Request $request): Response
+    public function articleshow(Article $article,string $category, string $slug, Request $request, CategoryRepository $categoryRepository): Response
     {
-        if($slug !== $article->getSlug() || $category !== $article->getCategory()->getTitle() ){
+        if($slug !== $article->getSlug() || $category !== strtolower($article->getCategory()->getTitle() )){
             return $this->redirectToRoute('articles_show',
                 [
-                    'category'=>$article->getCategory()->getTitle(),
+                    'category'=> strtolower( $article->getCategory()->getTitle()),
                     'slug'=>$article->getSlug(),
                     'id'=>$article->getId()
                 ],301);
@@ -51,28 +51,29 @@ class ArticleController extends AbstractController
         // }
         return $this->renderForm('main/article/show.html.twig', [
             'article'=>$article,
-            // 'comment' => $comment,
+            'category' => $categoryRepository->findAll(),
             'form' => $form,
         ]);
     }
     /**
      * @Route("/articles", name="articles")
+     * @Route("/articles/{categorieTitle}", name="articles_categorie")
      */
-    public function index(Request $request, PaginatorInterface $paginator, ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
+    public function index(string $categorieTitle = null, Request $request, PaginatorInterface $paginator, ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
     {
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
-        $pagination = $paginator->paginate(
-            $articleRepository->search(
-                $search->getMots(),
-                $search->getCategory(),
-                $search->getMinPrice(),
-                $search->getMaxPrice()
-            ),
-            $request->query->getInt('page',1),
-            12
-        );
-        // return $this->renderForm('main/article/index_1.html.twig', [
+        if($categorieTitle){
+            $categorieTitle = str_replace('-',' ',$categorieTitle);
+        }
+        $pageGroupe = ($categorieTitle) ? $articleRepository->findByCategoryTitle($categorieTitle,$request->get('minPrice'),$request->get('maxPrice')) : 
+        $articleRepository->search(
+            $search->getMots(),
+            $search->getCategory(),
+            $search->getMinPrice(),
+            $search->getMaxPrice()
+        ); 
+        $pagination = $paginator->paginate($pageGroupe, $request->query->getInt('page',1), 12);
         return $this->renderForm('main/article/index.html.twig', [
             'articles' => $pagination,
             'form'=>$form,

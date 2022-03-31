@@ -13,6 +13,7 @@ class ArticleOption
     public function __consrtuct()
     {
         $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime('+ 3 days');
     }
     /**
      * @ORM\Id

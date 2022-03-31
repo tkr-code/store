@@ -7,11 +7,17 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\Table(name="article", indexes={@ORM\Index(columns={"title","description"}, flags={"fulltext"})})
-
+ * @UniqueEntity(
+ *  fields="title", message="Le nom  de l'article existe!",
+ *  fields="ref", message="La  référence de l'article existe!",
+ * )
  */
 class Article
 {
@@ -23,6 +29,7 @@ class Article
     private $id;
 
     /**
+     * @Assert\NotNull
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -65,7 +72,7 @@ class Article
     private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity=ArticleOption::class, mappedBy="article", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ArticleOption::class, mappedBy="article", orphanRemoval=true, cascade={"persist"})
      */
     private $options;
 
@@ -83,6 +90,21 @@ class Article
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ref;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantityMin;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_expiry;
 
 
     public function __construct()
@@ -303,6 +325,42 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRef(): ?string
+    {
+        return $this->ref;
+    }
+
+    public function setRef(string $ref): self
+    {
+        $this->ref = $ref;
+
+        return $this;
+    }
+
+    public function getQuantityMin(): ?int
+    {
+        return $this->quantityMin;
+    }
+
+    public function setQuantityMin(int $quantityMin): self
+    {
+        $this->quantityMin = $quantityMin;
+
+        return $this;
+    }
+
+    public function getIsExpiry(): ?bool
+    {
+        return $this->is_expiry;
+    }
+
+    public function setIsExpiry(bool $is_expiry): self
+    {
+        $this->is_expiry = $is_expiry;
 
         return $this;
     }

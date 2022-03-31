@@ -20,6 +20,30 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    /**
+     * Recherche par categorie
+     *
+     * @return void
+     */
+    public function findByCategoryTitle(string $categoryTitle, string $min = null, string $max = null){
+        $title = strtolower($categoryTitle);
+        $query = $this->findQueryBuilder();
+        if($min != null){
+            $query
+            ->andWhere("p.price >= :minprix ")
+            ->setParameter("minprix",$min);
+        }
+        if($max != null){
+            $query
+                ->andWhere("p.price <= :maxprix ")
+                ->setParameter("maxprix",$max);
+        }
+        $query->leftJoin('p.category', 'c');
+        $query->andWhere('c.title = :title')
+        ->setParameter('title',$title);
+        return $query->getQuery()->getResult();
+    }
+
         /**
      * Recheche les articles en fonctions du formulaire
      *

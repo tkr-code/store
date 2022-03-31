@@ -57,6 +57,7 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "^5.3",
+        "symfony/test-pack": "^1.0",
         "symfony/var-dumper": "^5.3",
         "symfony/web-profiler-bundle": "^5.3"
     },
@@ -65,7 +66,12 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
     },
     "autoload": {
         "psr-4": {

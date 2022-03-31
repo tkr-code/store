@@ -7,6 +7,8 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -18,6 +20,11 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('ref',TextType::class,[
+                'attr'=>[
+                    'placeholder'=>'Enter the reference of product'
+                ]
+            ])
             ->add('title',TextType::class,[
                 'attr'=>[
                     'placeholder'=>'Enter title'
@@ -42,6 +49,12 @@ class ArticleType extends AbstractType
                 ],
                 'help'=>'The quantity must be greater than zero'
             ])
+            ->add('quantityMin',NumberType::class,[
+                'attr'=>[
+                    'placeholder'=>'The quantity must be greater than zero'
+                ],
+                'help'=>'The quantity must be greater than zero'
+            ])
             ->add('description',TextareaType::class,[
                 'attr'=>[
                     'placeholder'=>'The descripsion greater 10 characters'
@@ -58,6 +71,7 @@ class ArticleType extends AbstractType
                 'required'=>false
                 ])
             ->add('enabled')
+            ->add('isExpiry',CheckboxType::class)
         ;
     }
 

@@ -61,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $orders;
 
     /**
-     * @ORM\OneToMany(targetEntity=Adress::class, mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="user", cascade={"persist"})
      */
     private $adresses;
 
@@ -263,14 +263,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|Adress[]
+     * @return Collection|Adresse[]
      */
     public function getAdresses(): Collection
     {
         return $this->adresses;
     }
 
-    public function addAdress(Adress $adress): self
+    public function addAdress(Adresse $adress): self
     {
         if (!$this->adresses->contains($adress)) {
             $this->adresses[] = $adress;
@@ -280,7 +280,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeAdress(Adress $adress): self
+    public function removeAdress(Adresse $adress): self
     {
         if ($this->adresses->removeElement($adress)) {
             // set the owning side to null (unless already changed)

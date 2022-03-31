@@ -4,6 +4,7 @@
 {% import "macros/breadcrumb.html.twig" as utils %}
 {% import "macros/alertes.html.twig" as alerte %}
 {% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as links %}
 
 {% extends 'admin/base.html.twig' %}
 
@@ -33,7 +34,6 @@
             </div>
             <div class="card-body">
                 {{ include('admin/article/_form.html.twig',{button_label:action}) }}
-                <a class="btn btn-light mt-2" href="{{ path('article_index') }}">back to list <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> </a>
             </div>
         </div>
     </div>
@@ -115,6 +115,7 @@
         </div>
       </div>
 </div>
+{{ links.back(path('article_index')) }}
 {% endblock %}
 {% block foot %}
     <script src="{{ asset('js/image.js') }}"></script>

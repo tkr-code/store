@@ -80,7 +80,7 @@ class Order
     private $order_item;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Adress::class, inversedBy="orders", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="orders", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $shipping_adress;
@@ -285,12 +285,12 @@ class Order
         return $this;
     }
 
-    public function getShippingAdress(): ?Adress
+    public function getShippingAdress(): ?Adresse
     {
         return $this->shipping_adress;
     }
 
-    public function setShippingAdress(?Adress $shipping_adress): self
+    public function setShippingAdress(?Adresse $shipping_adress): self
     {
         $this->shipping_adress = $shipping_adress;
 

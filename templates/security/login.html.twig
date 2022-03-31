@@ -24,9 +24,9 @@
 
                         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                         <label class="text-primary" for="inputEmail"> <i class="fa fa-envelope" aria-hidden="true"></i> Email</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" placeholder="email" class="form-control" autocomplete="email" required autofocus>
+                        <input type="email" value="{{ last_username|default('admin@store.com') }}" name="email" id="inputEmail" placeholder="email" class="form-control" autocomplete="email" required autofocus>
                         <label for="inputPassword" class="text-primary"> <i class="fa fa-lock" aria-hidden="true"></i> Password</label>
-                        <input type="password" name="password" id="inputPassword" placeholder="password" class="form-control" autocomplete="current-password" required>
+                        <input type="password" name="password" id="inputPassword" value="password" placeholder="password" class="form-control" autocomplete="current-password" required>
 
                         <input type="hidden" name="_csrf_token"
                             value="{{ csrf_token('authenticate') }}"

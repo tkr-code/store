@@ -6,6 +6,7 @@ twig:
         locales: '%app.locales%'
         search_form: '@App\Twig\SearchExtension'
         navs: '@App\Twig\NavExtension'
+        filtres: '@App\Twig\FiltreExtension'
 when@test:
     twig:
         strict_variables: true

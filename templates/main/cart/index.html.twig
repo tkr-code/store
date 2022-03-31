@@ -3,7 +3,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Hello CardController!{% endblock %}
+{% block title %}Hello Card!{% endblock %}
 
 {% block body %}
 {{ search.search(form) }}
@@ -19,7 +19,7 @@
   </div>
 {% endfor %}
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-lg-8">
     {% if app.request.session.get('panier') %}
@@ -81,7 +81,7 @@
                 <div class="btn-group">
                   {% if app.session.get('panier') != [] %}
                   {% if is_granted('ROLE_CLIENT') %}
-                    <a href="{{ path('order_client_shipping') }}" class="btn btn-lg ml-1 rounded btn-primary" type="submit">
+                    <a href="{{ path('order_customer') }}" class="btn btn-lg ml-1 rounded btn-primary" type="submit">
                       Commander
                     </a>
                     {% else %}

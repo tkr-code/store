@@ -14,13 +14,13 @@
         <div class="mb-2">
             <div style="height:50px">
                 <h6 class="font-weight-semibold mb-2"> 
-                    <a href="{{ path('articles_show', { category: item.category.title, slug: item.slug, id: item.id}) }}" class="text-default mb-2" data-abc="true">
+                    <a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug|lower, id: item.id}) }}" class="text-default mb-2" data-abc="true">
                         {{item.title}}
                     </a> 
                 </h6> 
             </div>
-            <div style="height:50px;">
-                <a href="#" class="text-muted" data-abc="true">
+            <div style="height:50px;" class="text-justify">
+                <a href="#" class="text-muted " data-abc="true">
                     {{item.description }}
                 </a>
             </div>

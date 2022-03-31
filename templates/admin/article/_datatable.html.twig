@@ -1,61 +1,38 @@
 <table id="datatable_{{id}}" class="table table-bordered table-striped">
     <thead>
     <tr>
+        <th>Référence</th>
         <th>Nom</th>
         <th>Prix d'achat</th>
-        <th>Prix</th>
+        <th>Prix de vente</th>
         <th>Quantité</th>
-        <th>Description</th>
-        <th>Crée </th>
-        <th>Edité  </th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
     {% for item in articles %}
     <tr>
-        <td>#{{ item.id}} {{ item.title}}</td>
+        <td>{{ item.ref}}</td>
+        <td>{{ item.title}}</td>
         <td>{{ item.formatterBuying}}</td>
         <td>{{ item.formatterPrice}}</td>
         <td>{{ item.quantity}}</td>
-        <td>{{ item.description}}</td>
-        <td>{{ item.createdAt|date_format_fr|trans }}</td>
-        <td>
-        {% if item.updatedAt %} 
-        {{ item.updatedAt|date_format_fr|trans }}
-        {% else %}
-        Not modify
-        {% endif %}
-        </td>
         <td>
         
-        <a href="{{ path('article_show',{id: item.id} ) }}" class="btn">
-            <i class="fa fa-eye text-dark" aria-hidden="true"></i>
-        </a>
-        <a href="{{ path('article_edit',{id: item.id} ) }}" class="btn">
-            <i class="fas fa-edit text-success"></i>
-        </a>
-        {% if is_granted('ROLE_ADMIN') %}
-        <form class="d-inline-block" method="post" action="{{ path('article_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
-            <button class="btn"><i class="fas fa-trash-alt  text-danger  "></i></button>
-        </form>
-        {% endif %}
-        
+            <a href="{{ path('article_show',{id: item.id} ) }}" class="btn">
+                <i class="fa fa-eye text-dark" aria-hidden="true"></i>
+            </a>
+            <a href="{{ path('article_edit',{id: item.id} ) }}" class="btn">
+                <i class="fas fa-edit text-success"></i>
+            </a>
+            {% if is_granted('ROLE_ADMIN') %}
+            <form class="d-inline-block" method="post" action="{{ path('article_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                <button class="btn"><i class="fas fa-trash-alt  text-danger  "></i></button>
+            </form>
+            {% endif %}
         </td>
     </tr>
     {% endfor %}
     </tbody>
-        <tfoot>
-        <tr>
-            <th>Nom</th>
-            <th>Prix d'achat</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Description</th>
-            <th>Crée </th>
-            <th>Edité  </th>
-            <th>Action</th>
-        </tr>
-        </tfoot>
 </table>

@@ -71,6 +71,7 @@ class OrderController extends AbstractController
     }
 
     /**
+     * @Route("/customer/order/new-order", name="order_customer", methods={"GET","POST"})
      * @Route("/admin/order/new-order", name="order_user", methods={"GET","POST"})
      */
     public function newOrder(PaymentMethodRepository $paymentMethodRepository, ArticleRepository $articleRepository, Request $request, OrderService $orderService, SessionInterface $session): Response

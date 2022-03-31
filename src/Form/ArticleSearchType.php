@@ -27,34 +27,35 @@ class ArticleSearchType extends AbstractType
                 ],
                 'required'=>false
             ])
-            ->add('maxPrice',IntegerType::class,[
-                'required'=>false,
-                'label'=>false,
-                'attr'=>[
-                    'placeholder'=>'Maximum budget'
-                ]
-            ])
-            ->add('minPrice',IntegerType::class,[
-                'required'=>false,
-                'label'=>false,
-                'attr'=>[
-                    'placeholder'=>'Minimum budget'
-                ]
-            ])
-            ->add('category',EntityType::class,[
-                'class'=>Category::class,
-                // 'query_builder'=>function(EntityRepository $entityRepository){
-                //     return $entityRepository->createQueryBuilder('p')
-                //     ->where('is_anabled = true');
-                // },
-                'choice_label'=>'title',
-                'label'=>false,
-                'required'=>false,
-                'attr'=>[
-                    'class'=>'select2',  
-                ],
-                'placeholder'=>'All articles'
-            ])
+            // ->add('maxPrice',IntegerType::class,[
+            //     'required'=>false,
+            //     'label'=>false,
+            //     'attr'=>[
+            //         'placeholder'=>'Maximum budget'
+            //     ]
+            // ])
+            // ->add('minPrice',IntegerType::class,[
+            //     'required'=>false,
+            //     'label'=>false,
+            //     'attr'=>[
+            //         'placeholder'=>'Minimum budget'
+            //     ]
+            // ])
+            // ->add('category',EntityType::class,[
+            //     'class'=>Category::class,
+            //     // 'query_builder'=>function(EntityRepository $entityRepository){
+            //     //     return $entityRepository->createQueryBuilder('p')
+            //     //     ->where('is_anabled = true');
+            //     // },
+            //     'choice_label'=>'title',
+            //     'choice_value'=>'title',
+            //     'label'=>false,
+            //     'required'=>false,
+            //     'attr'=>[
+            //         'class'=>'select2',  
+            //     ],
+            //     'placeholder'=>'All articles'
+            // ])
         ;
     }
     public function getCats(){
