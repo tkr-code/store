@@ -1,0 +1,37 @@
+twig:
+    cache: false
+    default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
+    globals: 
+        app_name: 'Lest'
+        locales: '%app.locales%'
+        search_form: '@App\Twig\SearchExtension'
+        navs: '@App\Twig\NavExtension'
+        categories: '@App\Twig\CategoryExtention'
+        parentCategorys: '@App\Twig\CategoryParentExtention'
+        gg_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+        site:
+            version: '1.0' 
+            name: 'lest'
+            email: 'contact@lest.sn'
+            path_logo: 'lest-logo.png'
+            current_name: 'F CFA'
+            current: 'XOF'
+            phone_number_1: '+221 77 801 06 46'
+            phone_1: '+221778010646'
+            phone_number_2: '+221 76 201 51 61'
+            phone_2: '+221762015161'
+            link: "https://lest.sn"
+            mission_text: 'text à definir'
+            user_empty: 'empty.png'
+            orange_money: '+221 77 801 06 46'
+            code_postal: 'DK 11300'
+            adresse: 'Médina Marché champ de course'
+            ville: 'Dakar'
+            pays: 'Sénégal'
+            whatsapp: "https://api.whatsapp.com/send?phone=221778010646&text=Salut, je vous contacte depuis votre site lest.sn"
+            facebook: 'https://www.facebook.com/Les-Spécialistes-de-la-Technologie-LEST-575426226469195/'
+
+when@test:
+    twig:
+        strict_variables: true

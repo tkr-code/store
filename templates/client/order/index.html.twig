@@ -1,0 +1,127 @@
+{% import "macros/table.html.twig" as table %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/search.html.twig" as search %}
+
+{% extends 'lesekoya/base.html.twig' %}
+
+{% block title %}Client | {{app_name}} {% endblock %}
+
+{% block stylesheets %}
+{{ dataTable.css() }}
+{% endblock %}
+
+{% block body %}
+<style>
+    .card-header{
+        background-color:transparent;
+    }
+</style>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ path('home') }}">{{'Home'|trans}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('client_order') }}">{{'Customer'|trans}}</a></li>
+    <li class="breadcrumb-item active">{{'My orders'|trans}}</li>
+</ol>
+<div class="container-fluid">
+    <div class="row my-5">
+        {% include "client/nav.html.twig" %}
+        <div class="col-md-9 col-12 div-primary">
+            <div class="card card-primary border-0 card-outline card-tabs">
+                <div class="card-header bg-white">
+                    <p class="p-0 m-0 h4">{{ 'My orders'|trans }}</p>    
+                </div>
+                <div class="card-header p-0 pt-1 border-bottom-0">
+                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
+                                href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
+                                aria-selected="true">{{'All'|trans}} (<span class="font-weight-bold">
+                                    {{ orders| length }}
+                                </span>)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
+                                href="#order-en-attente" role="tab" aria-controls="custom-tabs-three-profile"
+                                aria-selected="false">
+                                {{'Waiting'|trans}} (<span class="font-weight-bold">
+                                    {{ ordersWaiting| length }}
+                                </span>)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
+                                href="#order-in-progress" role="tab" aria-controls="custom-tabs-three-profile"
+                                aria-selected="false">
+                                {{'In progress'|trans}} (<span class="font-weight-bold">
+                                    {{ ordersInProgress| length }}
+                                </span>)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
+                                href="#order-canceled" role="tab" aria-controls="custom-tabs-three-profile"
+                                aria-selected="false">{{'Canceled'|trans}} (<span class="font-weight-bold">
+                                    {{ ordersCanceled| length }}
+                                </span>)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
+                                href="#order-completed" role="tab" aria-controls="custom-tabs-three-profile"
+                                aria-selected="false">{{'Completed'|trans}} (<span class="font-weight-bold">
+                                    {{ ordersCompleted| length }}
+                                </span>)</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-three-tabContent">
+                        <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel"
+                            aria-labelledby="custom-tabs-three-home-tab">
+                            {{ include ("client/order/_datatable.html.twig",{id:'1',orders: orders}) }}
+
+                        </div>
+                        <div class="tab-pane fade" id="order-in-progress" role="tabpanel"
+                            aria-labelledby="custom-tabs-three-profile-tab">
+                            {{ include ("client/order/_datatable.html.twig",{id:'2',orders: ordersInProgress}) }}
+                        </div>
+                        <div class="tab-pane fade" id="order-en-attente" role="tabpanel"
+                            aria-labelledby="custom-tabs-three-profile-tab">
+                            {{ include ("client/order/_datatable.html.twig",{id:'3',orders: ordersWaiting}) }}
+                        </div>
+                        <div class="tab-pane fade" id="order-completed" role="tabpanel"
+                            aria-labelledby="custom-tabs-three-profile-tab">
+                            {{ include ("client/order/_datatable.html.twig",{id:'4',orders: ordersCompleted}) }}
+                        </div>
+                        <div class="tab-pane fade" id="order-canceled" role="tabpanel"
+                            aria-labelledby="custom-tabs-three-profile-tab">
+                            {{ include ("client/order/_datatable.html.twig",{id:'5',orders: ordersCanceled}) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot %}
+{{ dataTable.js()}}
+{% endblock %}
+
+{% block javascripts %}
+{{ dataTable.script('#datatable_1') }}
+{{ dataTable.script('#datatable_2') }}
+{{ dataTable.script('#datatable_3') }}
+{{ dataTable.script('#datatable_4') }}
+{{ dataTable.script('#datatable_5') }}
+<script>
+    $(document).ready(function () {
+        $('.my-orders').addClass('active')
+    })
+</script>
+{% endblock %}

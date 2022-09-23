@@ -1,0 +1,68 @@
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/link.html.twig" as link %}
+
+{% extends 'admin/base.html.twig' %}
+
+
+{% block stylesheets %}
+{{ head.dataTable() }}
+{% endblock %}
+
+{% block breadcrumb %}
+{{ utils.breadcrumb('Manage Order',[
+{
+path:'order_index',
+name:'Manage orders'
+}
+])}}
+{% endblock %}
+
+{% block title %}Manage ShippingAmount | {{ app_name }} {% endblock %}
+
+
+{% block body %}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-edit"></i>
+            ShippingAmount index
+        </h3>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rues</th>
+                    <th>Amount</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shipping_amount in shipping_amounts %}
+                <tr>
+                    <td>
+                    {% for item in shipping_amount.street %}
+                        {{ item.name }}
+                    {% endfor %}
+                    </td>
+                    <td>{{ shipping_amount.amount }}</td>
+                    <td>
+                        <a href="{{ path('shipping_amount_show', {'id': shipping_amount.id}) }}">show</a>
+                        <a href="{{ path('shipping_amount_edit', {'id': shipping_amount.id}) }}">edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.card -->
+{% endblock %}

@@ -1,0 +1,23 @@
+<div class="col-lg-3 mb-5 div-secondary">
+    <div class="card card-outline border-0 card-primary">
+        <div class="card-bod">
+            <div class="list-group">
+                <a href="{{ path('client_index') }}" class="list-group-item list-group-item-action rounded my-account border-0">
+                    <i class="fa fa-user"></i> {% trans %}My account{% endtrans %}
+                </a>
+                <a href="{{ path('client_order') }}" class="list-group-item list-group-item-action my-orders rounded border-0">
+                    <i class="ml-1 fas fa-box-open"></i> {% trans %}My orders{% endtrans %}
+                </a>
+                <a href="{{ path('client_buy') }}" class="list-group-item list-group-item-action my-achat border-0 rounded">
+                    <i class="ml-1 fas fa-box-open"></i> {{'My buys'|trans}}
+                </a>
+            </div>
+            <hr>
+            <div class="list-group">
+                <button type="button" class="border-0 list-group-item list-group-item-action">
+                    <a href="{{ path('app_logout') }}"><i class="fa fa-power-off text-danger" aria-hidden="true"></i> {% trans %}Log out{% endtrans %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

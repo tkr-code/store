@@ -1,0 +1,48 @@
+{% extends 'lesekoya/base.html.twig' %}
+
+{% block title %}Edit adress{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ path('home') }}">{{'Home'|trans}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('client_index') }}">{{'Customer'|trans}}</a></li>
+    <li class="breadcrumb-item active">{{'Cart'|trans}}</li>
+</ol>
+<div class="container-fluid">
+
+    <div class="row my-5">
+        {% include "client/nav.html.twig" %}
+        <div class="col-lg-8 div-primary">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="p-0 m-0 ">Edit adress</p>
+                        </div>
+                        <div class="card-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                        {% for item in client.adresses %}
+                            <p>
+                                {{item}}
+                            </p>
+                        {% endfor %}
+
+    {# {{ include('client/_form.html.twig', {'button_label': 'Update'}) }} #}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

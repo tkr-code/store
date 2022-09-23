@@ -1,0 +1,89 @@
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/search.html.twig" as search %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% extends 'lesekoya/base.html.twig' %}
+
+{% block title %}Achat | {{app_name}} {% endblock %}
+
+{% block head %}
+{{ head.dataTable() }}
+{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ path('home') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('client_index') }}">{{'Client'|trans}}</a></li>
+    <li class="breadcrumb-item active">{{'My buys'|trans}}</li>
+</ol>
+<div class="container-fluid">
+    <div class="row my-5">
+        {% include "client/nav.html.twig" %}
+        <div class="col-lg-9 mb-3 div-primary">
+            <div class="card card-primary border-0">
+                <div class="card-header bg-white">{{'My buys'|trans}}</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table id="table-1" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix et Quantité</th>
+                                        <th> Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in app.user.client.articleBuys %}
+                                    <tr>
+                                        <td>
+                                            {% for item in item.article.images|slice(0,1) %}
+                                            <img src="{{ asset('img/article/' ~ item.name ) }}" width="40">
+                                            {% else %}
+                                            <img src="{{ asset('img/vide.png') }}" width="40">
+                                            {% endfor %}
+                                            <a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug, id: item.id}) }}">
+                                                {{ item.article.title }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ item.article.price|number_format(0,'.',' ') }} * {{item.quantity}}
+                                        </td>
+                                        <td>
+                                            {{item.quantity * item.price }}
+                                        </td>
+                                        <td>
+                                            <a href="#"><i class="fa fa-comments" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot %}
+{{ foot.dataTable()}}
+{% endblock %}
+
+{% block javascripts %}
+{{ table.jsDataTable('table-1') }}
+<script>
+    $(document).ready(function () {
+        $('.my-achat').addClass('active')
+    })
+</script>
+{% endblock %}

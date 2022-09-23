@@ -1,0 +1,31 @@
+{% import "macros/breadcrumb.html.twig" as utils %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edit email User | {{app_name}} {% endblock %}
+
+{% block breadcrumb %}
+    {{ utils.breadcrumb('Edit Profile',[
+        {
+            path:path('profile_index'),
+            name:'Profile'
+        }
+    ])}}
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h4>
+                    Edit User
+                </h4>
+            </div>
+            <div class="card-body">
+                {{ include('admin/profile/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

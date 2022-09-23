@@ -1,0 +1,27 @@
+{% macro edit(path) %}
+    <a class="btn btn-sm btn-success " href="{{ path }} "><i class="fas fa-pencil-alt"></i></a>
+{% endmacro %}
+
+{% macro delete(path) %}
+    <a class="btn btn-sm btn-danger " href="{{ path }} "><i class="fas fa-trash-alt"></i></a>
+{% endmacro %}
+
+{% macro back(path,text) %}
+    <a class="btn btn-dark" href="{{ path }}" title="Retour"> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> {{ text|default('back to list') }} </a>
+{% endmacro %}
+{% macro add(path,text) %}
+    <a class="btn btn-primary" href="{{ path }} "> {{ text|default('Create') }}</a>
+{% endmacro %}
+
+{% macro show(path,attr =[]) %}
+    <a href="{{ path|default('#') }}" 
+    title="Afficher" class="p-2 {{ (attr.class is defined ) ? attr.class:'' }}">
+        <i class="fa fa-eye text-dark"></i>
+    </a>
+{% endmacro %}
+{% macro pencil(path) %}
+    <a href="{{ path|default('#') }}" title="Modifier">
+        <i class="fas fa-pencil-alt text-success"></i>
+    </a>
+{% endmacro %}
+

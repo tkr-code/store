@@ -1,0 +1,137 @@
+{% import "macros/breadcrumb.html.twig" as utils %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block breadcrumb %}
+{{ utils.breadcrumb('View Article'|trans,[
+{
+path:path('article_index'),
+name:'Manage Articles'
+}
+])}}
+{% endblock %}
+
+{% block body %}
+<div class="card card-solid">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3 class="d-inline-block d-sm-none">{{ article.title}}</h3>
+                <div class="col-12">
+                    {% for item in article.images | slice(0,1) %}
+                    <img src="{{ asset('img/article/' ~ item.name ) }}" class="product-image" alt="Product Image">
+                    {% else %}
+                    <img src="{{ asset('img/vide.png') }}" class="product-image" alt="Product Image">
+                    {% endfor %}
+                </div>
+                <div class="col-12 product-image-thumbs">
+                    {% for key, item in article.images %}
+                    <div class="product-image-thumb {% if loop.first %}active{% endif %}">
+                        <img src="{{ asset('img/article/' ~ item.name ) }}" alt="Product Image">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3 class="my-3">{{ article.title }}</h3>
+                <p>{{ article.description }}</p>
+                <div class="mt-4">
+                    <a href="{{ path('article_edit',{ id: article.id }) }}" class="btn btn-success btn-lg btn-flat">
+                        Editer
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a href="{{ path('article_new_copy',{ id: article.id }) }}" class="btn btn-copy btn-info btn-lg btn-flat">
+                        Copier
+                        <i class="fas fa-copy"></i>
+                    </a>
+                    <p>Nb: La copie ne concerne pas les Images, la quantité et l'état.</p>
+                </div>
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td scope="row">Prix d'achat</td>
+                            <td>{{ article.formatterPrice}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Prix de vente</td>
+                            <td>{{ article.formatterBuying}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Categorie</td>
+                            <td>{{ article.category.parentCategory ? article.category.parentCategory.name ~ ' - ' : ''
+                                }} {{ article.category.title }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Marque</td>
+                            <td>{{ article.brand ? article.brand.name : 'Non définie' }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Quantity</td>
+                            <td>{{ article.quantity}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Quantity en stock</td>
+                            <td>{{ article.qtyReel}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Nombre de vente </td>
+                            <td>{{ article.articleBuys|length}}</td>
+                        </tr>
+
+                        <tr>
+                            <td scope="row">Date de creation</td>
+                            <td>{{ article.createdAt|date_format_fr }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Dernière modification</td>
+                            <td>{{ article.updatedAt ? article.updatedAt|date_format_fr : 'jamais modifié' }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Activer</td>
+                            <td>{{ article.enabled ? 'Oui' : 'Non' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Specificity of the article</h4>
+                <table class="table table-striped">
+                    <tbody>
+                        {% for item in article.options %}
+                        <tr>
+                            <td scope="row">{{ item.title }}</td>
+                            <td>{{ item.content }}</td>
+                        </tr>
+                        {% else %}
+                        <h4 class="text-center">No Specificity</h4>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a class="btn btn-dark m-2" href="{{ path('article_index') }}">back to list <i class="fa fa-arrow-circle-left"
+                aria-hidden="true"></i></a>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+        $('.product-image-thumb').on('click', function () {
+            var $image_element = $(this).find('img')
+            $('.product-image').prop('src', $image_element.attr('src'))
+            $('.product-image-thumb.active').removeClass('active')
+            $(this).addClass('active')
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html.twig" %}
+{% import "macros/search.html.twig" as search %}
+
+{% block title %}Nos articles{% endblock %}
+
+{% block body %}
+<style type="text/css">
+    body {
+    margin: 0;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5385;
+    color: #333;
+    text-align: left;
+    background-color: #2196F3
+}
+
+.mt-50 {
+    margin-top: 50px
+}
+
+.mb-50 {
+    margin-bottom: 50px
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .1875rem
+}
+
+.card-img-actions {
+    position: relative
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    text-align: center
+}
+
+.card-img {
+    width: 350px
+}
+
+.star {
+    color: red
+}
+
+.bg-cart {
+    background-color: orange;
+    color: #fff
+}
+
+.bg-cart:hover {
+    color: #fff
+}
+
+.bg-buy {
+    background-color: green;
+    color: #fff;
+    padding-right: 29px
+}
+
+.bg-buy:hover {
+    color: #fff
+}
+/* .list-group .active{
+    background:red;
+    color:#000!important;
+} */
+a {
+    text-decoration: none !important
+}
+</style>
+{{ search.search(form) }}
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <p class="h3" >All articles </p>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for item in category %}
+                    <li class="list-group-item d-flex rounded justify-content-between align-items-center border-0 {{ app.request.get('category') == item.id ? 'active':'' }}">
+                        <a class="font-weight-bold" href="{{ path('articles',{category: item.id }) }}">{{ item.title }}</a>
+                        {# <span>(920200)</span> #}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <h1>{% trans %}See all our articles{% endtrans %} |  {{ articles.getTotalItemCount }} Produt{% if articles.getTotalItemCount > 0 %}s{% endif %}  </h1>
+        {% if articles is empty() %}
+        <div class="alert alert-info text-center">
+            <p>Aucun résulat associé à la recherche:</p>
+        </div>
+        {% endif %}
+        <div class="pagination">
+            {{ knp_pagination_render(articles) }}
+        </div>
+        <div class="row">
+        {% for item in articles %}
+            <div class="col-md-4 mt-2">
+                {% include "main/article/_article.html.twig" %}  
+            </div>
+        {% endfor %}
+        </div>
+        {{ knp_pagination_render(articles) }}
+    </div>
+</div>
+    
+{% endblock %}

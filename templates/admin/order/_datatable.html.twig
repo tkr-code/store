@@ -1,0 +1,68 @@
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/action.html.twig" as action %}
+
+<table id="datatable_{{ id }}" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Order</th>
+            <th>state</th>
+            <th>Date</th>
+            <th>Livraison</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr {{ (order.user.status == 'Delete')? 'class="text-danger"': '' }}>
+            <td>#{{ order.id }}
+            {{ order.user.personne.firstname ~ ' ' ~ order.user.personne.lastname ~ ' ' }}
+            {% if order.state != 'completed' %}
+                <a 
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Edit Order"
+                    class="ml-1 mr-1" href="{{ path('order_edit', {'id': order.id}) }}"> <i class="fas fa-pencil-alt text-success"></i></a>
+            {% endif %}
+             <a 
+                class="float-right js-order-view"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="Look"
+                href="{{ path('main_order_show', {'id': order.id}) }}"><i class="fa fa-eye text-dark"></i></a>
+                
+            </td>
+                
+            <td class="state">
+                {{ btn.order(order.state) }}
+            </td>
+            <td>{{ order.createdAt|date_format_fr }}</td>
+            <td>
+            {{ order.user.personne.firstname ~ ' ' ~ order.user.personne.lastname ~ ', '}}
+            {{ order.deliverySpace != null  ? order.deliverySpace.street.name :'' }}
+            <br/>
+            <small class="text-info">Via : {{ order.payment.paymentMethod.name|default('sans')}} </small>
+
+            </td>
+            <td>{{ order.total | number_format(2,'.',' ') }} XOF</td>
+            <td>
+                {{action.order(order)}}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="12">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Order</th>
+            <th>state</th>
+            <th>Livraison</th>
+            <th>Createdat</th>
+            <th>Total</th>
+            <th>actions</th>
+        </tr>
+    </tfoot>
+    </table>

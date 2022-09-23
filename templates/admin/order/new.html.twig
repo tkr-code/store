@@ -1,0 +1,28 @@
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% extends 'admin/base.html.twig' %}
+{% block title %}New Order |
+	{{ app_name }}
+{% endblock %}
+{% block breadcrumb %}
+	{{ utils.breadcrumb('Ajouter une commande',[ { path:path('order_index'), name:'Listes des commandes' } ])}}
+{% endblock %}
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-outline card-primary">
+				<div class="card-body">
+					{{ form_start(form,{ 'attr':{ 'novalidate':'novalidate' } }) }}
+					{{ form_row(form.user)}}
+					{{ form_row(form.note)}}
+					{{ form_row(form.street)}}
+					{{ form_row(form.payment)}}
+					<button type="submit" class="btn btn-primary">Submit</button>
+					{{ form_end(form) }}
+                    {% import "macros/link.html.twig" as link %}
+                    <hr>
+                    {{ link.back(path('order_index'),'Back to client list') }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

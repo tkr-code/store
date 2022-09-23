@@ -1,0 +1,11 @@
+{% extends "email/base.html.twig" %}
+{% block body %}
+<p>
+    Si vous n'êtes pas à l'origine de la création d'un compte sur notre boutique en ligne lest
+merci de cliquer sur ce lien pour la suppression du compte :
+    {# <a style="color:#5F5F5F" href="{{ signedUrl|default('#') }}">Confirmer mon Email</a>. #}
+    {# {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}. #}
+</p>
+{% endblock %}
+{% block btn_path %} {{ url('client_user_delete',{id:user.client.id,key:user.cle}) }} {% endblock %}
+{% block btn_text %} Supprimer le compte {% endblock %}

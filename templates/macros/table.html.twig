@@ -1,0 +1,8 @@
+{% macro head(items = '') %}
+    <tr>
+    {% for item in items %}
+        <th>{{ item }}</th>
+    {% endfor %}
+        <th>Action</th>
+    </tr>
+{% endmacro %}
