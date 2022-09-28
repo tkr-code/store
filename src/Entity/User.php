@@ -65,13 +65,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @Assert\Valid
-     * @ORM\OneToOne(targetEntity=Personne::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $personne;
-
-    /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user", orphanRemoval=true)
      */
     private $comments;
@@ -160,7 +153,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $last_name;
-
 
     public function __construct()
     {
@@ -263,17 +255,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getPersonne(): ?Personne
-    {
-        return $this->personne;
-    }
-
-    public function setPersonne(Personne $personne): self
-    {
-        $this->personne = $personne;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Comment[]
@@ -546,6 +527,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
+    public function getFullName(): ?string
+    {
+        return $this->first_name. ' ' . $this->last_name;
+    }
     public function getFirstName(): ?string
     {
         return $this->first_name;

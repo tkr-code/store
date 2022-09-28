@@ -16,7 +16,7 @@
     {% for order in orders %}
         <tr {{ (order.user.status == 'Delete')? 'class="text-danger"': '' }}>
             <td>#{{ order.id }}
-            {{ order.user.personne.firstname ~ ' ' ~ order.user.personne.lastname ~ ' ' }}
+            {{ order.user.fullname ~ ' ' }}
             {% if order.state != 'completed' %}
                 <a 
                     data-toggle="tooltip"
@@ -38,7 +38,7 @@
             </td>
             <td>{{ order.createdAt|date_format_fr }}</td>
             <td>
-            {{ order.user.personne.firstname ~ ' ' ~ order.user.personne.lastname ~ ', '}}
+            {{ order.user.fullname ~ ', '}}
             {{ order.deliverySpace != null  ? order.deliverySpace.street.name :'' }}
             <br/>
             <small class="text-info">Via : {{ order.payment.paymentMethod.name|default('sans')}} </small>

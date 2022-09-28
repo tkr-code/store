@@ -43,7 +43,7 @@
 								{% endif %}
 								<div class="form-group">
 									<label for="inputEmail">Adresse email *</label>
-									<input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+									<input type="email" value="{{ last_username|default('admin@store.com') }}" name="email" id="inputEmail"
 										placeholder="email" class="form-control" autocomplete="email" required
 										autofocus>
 								</div>
@@ -52,7 +52,7 @@
 								<div class="form-group">
 									<label for="inputPassword">Mot de passe *</label>
 									<input type="password" name="password" id="inputPassword" placeholder="password"
-										class="form-control" autocomplete="current-password" required>
+										class="form-control" value="password" autocomplete="current-password" required>
 									<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 								</div>
 								<!-- End .form-group -->

@@ -104,7 +104,7 @@
 						{% for item in clients %}
 						<tr {{ (item.user.status=='Delete' )? 'class="text-danger"' : '' }}>
 							<td>#{{ item.id }}
-								{{ item.user.personne.firstname ~ ' ' ~ item.user.personne.lastname |capitalize }}
+								{{ item.user.fullName |capitalize }}
 							</td>
 							<td>
 								{{ item.user.email|explode_email }}

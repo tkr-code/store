@@ -17,10 +17,12 @@ class Order
     const status = [
         'Canceled'=>'canceled',
         'Waiting'=>'waiting',
-        'in progress'=>'in progress',
+        'In progress'=>'in progress',
         'Shipping'=>'shipping',
         'Completed'=>'completed'
     ];
+    const EN_COUR = 'in progress';
+    const EN_ATTENTE = 'waiting';
 
     /**
      * @ORM\Id
@@ -119,6 +121,11 @@ class Order
      * @ORM\Column(type="string", length=255)
      */
     private $shipping_state;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $method_payment;
 
 
     public function __construct()
@@ -374,6 +381,18 @@ class Order
     public function setShippingState(string $shipping_state): self
     {
         $this->shipping_state = $shipping_state;
+
+        return $this;
+    }
+
+    public function getMethodPayment(): ?string
+    {
+        return $this->method_payment;
+    }
+
+    public function setMethodPayment(string $method_payment): self
+    {
+        $this->method_payment = $method_payment;
 
         return $this;
     }

@@ -109,7 +109,7 @@
               class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="{{ path('profile_index') }}" class="d-block">{{ app.user.personne.FullName|default('No name')
+            <a href="{{ path('profile_index') }}" class="d-block">{{ app.user.FullName|default('No name')
               }}</a>
           </div>
         </div>
@@ -222,12 +222,39 @@
       $(".alert").fadeTo(10000, 500).slideUp(500, function () {
         $(".alert").slideUp(500);
       });
+      
+      // Modal monant de livrauisn
+      $(document).on('click', '#btn-modal-shipping', function (e) {
+        e.preventDefault()
+        $('#modal-default').modal('show')
+        $('#modal-default .modal-title').html('Modifier la livraison')
+        let href = $(this).data('path')
+        alert('ok')
+        // $.ajax({
+        //   url: href,
+        //   method: 'POST',
+        //   type: 'json',
+        //   data: {
+        //     modal: 'state'
+        //   },
+        //   beforeSend: function () {
+        //     $('.modal-loader').css('display', 'flex')
+        //   },
+        //   success: function (data) {
+        //     $('#modal-default .modal-body').html(data.content)
+        //     $('.modal-loader').css('display', 'none')
+        //   },
+        //   error: function () {
+        //     $('.modal-loader').css('display', 'none')
+        //     alert('Chargement impossible')
+        //   }
+        // })
+      })
       // Modal status
       $(document).on('click', '#btn-modal-state', function (e) {
         e.preventDefault()
         $('#modal-default').modal('show')
         let href = $(this).data('path')
-        console.log(href);
         $.ajax({
           url: href,
           method: 'POST',

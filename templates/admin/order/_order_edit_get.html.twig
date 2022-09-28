@@ -41,8 +41,7 @@
 					<div class="col-sm-4 invoice-col">
 						{{'To'|trans}}
 						<address>
-							<strong>{{ order.user.personne.firstName ~ ' ' ~
-                                                        order.user.personne.lastName }}</strong><br>
+							<strong>{{ order.user.fullName }}</strong><br>
 							{% if order.user.adresse is not null %}
 								{{ order.user.adresse.rue ~ ' ' ~ order.user.adresse.city ~ ' ' ~
                                                     order.user.adresse.pays }}

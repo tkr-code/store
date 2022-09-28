@@ -1,7 +1,27 @@
 {% extends "base.html.twig" %}
 {% import "macros/search.html.twig" as search %}
 {% block title %} Home{% endblock %}
-
+{% block Breadcrumb %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('home') }}">{{'Home'|trans}}</a>
+            </li>
+            {% if app.request.get('_route') == 'articles_category' %}
+            <li class="breadcrumb-item">
+                <a href="{{ path('articles') }}">{{'Shop'|capitalize|trans}}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ app.request.get('category') |trans}}</li>
+            {% endif %}
+            {% if app.request.get('_route') == 'articles' %}
+            <li class="breadcrumb-item active" aria-current="page">{{'Shop'|trans}}</li>
+            {% endif %}
+        </ol>
+    </div>
+    <!-- End .container -->
+</nav>
+{% endblock %}
 {% block body %}
 
 {% endblock %}

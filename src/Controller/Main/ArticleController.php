@@ -75,7 +75,6 @@ class ArticleController extends AbstractController
 
         $isBuy = $isComment = false;
         if($user){
-
             $client = $user->getClient();
             if($client)
             {               

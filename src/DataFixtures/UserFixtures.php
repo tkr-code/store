@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Adresse;
+use App\Entity\Client;
 use App\Entity\Personne;
 use App\Entity\User;
 use App\Service\Service;
@@ -31,8 +32,7 @@ class UserFixtures extends Fixture
         ];
         foreach ($admin as $key => $value) {
             $user = new User();
-            $personne = new Personne();
-            $personne->setFirstName($value['first_name'])
+            $user->setFirstName($value['first_name'])
             ->setLastName($value['last_name']);
             $user->setEmail($value['email']);
             $user->setStatus('Activer');
@@ -40,8 +40,7 @@ class UserFixtures extends Fixture
             $user->setCle($this->service->aleatoire(100));
             $user->setPhoneNumber('770000000');
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
-            ->setRoles($value['roles'])
-            ->setPersonne($personne);
+            ->setRoles($value['roles']);
             $this->em->persist($user);
             $this->addReference('user_'.$value['email'],$user);
         }
@@ -55,9 +54,9 @@ class UserFixtures extends Fixture
             ],
         ];
         foreach ($clients as $key => $value) {
+            $client  = new Client();
             $user = new User();
-            $personne = new Personne();
-            $personne->setFirstName($value['first_name'])
+            $user->setFirstName($value['first_name'])
             ->setLastName($value['last_name']);
             $user->setEmail($value['email']);
             $user->setStatus('Activer');
@@ -65,8 +64,8 @@ class UserFixtures extends Fixture
             $user->setCle($this->service->aleatoire(100));
             $user->setPhoneNumber('770000000');
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
-            ->setRoles($value['roles'])
-            ->setPersonne($personne);
+            ->setRoles($value['roles']);
+            $user->setClient($client);
             $this->em->persist($user);
             $this->addReference('client_'.$value['email'],$user);
         }
