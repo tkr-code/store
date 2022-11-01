@@ -26,7 +26,7 @@ class CommentController extends AbstractController
     {
         return new JsonResponse([
             'reponse'=>true,
-            'content'=>$this->render('lest/shop/_form_comment.html.twig',['comment'=>$comment])->getContent()]);
+            'content'=>$this->render($this->getParameter('template').'/shop/_form_comment.html.twig',['comment'=>$comment])->getContent()]);
         return new JsonResponse(['reponse'=>false]);
     }
     /**

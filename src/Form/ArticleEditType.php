@@ -20,14 +20,21 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 
 class ArticleEditType extends AbstractType
 {
+    private $security;
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $disabled= ($this->security->isGranted('ROLE_ADMIN'))? false: true;
         $builder
             ->add('title',TextType::class,[
                 'label'=>'Nom du produit (*)',
@@ -35,6 +42,11 @@ class ArticleEditType extends AbstractType
                     'placeholder'=>'Enter title'
                 ],
                 'help'=>'the product is unique and greater than 3 characters'
+            ])
+            ->add('ref',TextType::class,[
+                'attr'=>[
+                    'disabled'=>$disabled
+                ]
             ])
             ->add('buyingPrice',TextType::class,[
                 'label'=>"Prix d'achat (*)",

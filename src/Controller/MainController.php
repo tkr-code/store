@@ -26,7 +26,7 @@ class MainController extends AbstractController
     public function service():Response
     {
 
-        return $this->render('lest/service.html.twig');
+        return $this->render($this->getParameter('template').'/service.html.twig');
     }
     /**
      * @Route("js/track-my-order/{number}", name="track_show")
@@ -38,7 +38,7 @@ class MainController extends AbstractController
         }
         return new JsonResponse([
             'reponse'=>true,
-            'content'=>$this->render('lest/track/_track_view.html.twig',[
+            'content'=>$this->render($this->getParameter('template').'/track/_track_view.html.twig',[
                 'order'=>$order
             ])->getContent() 
         ]);
@@ -50,25 +50,25 @@ class MainController extends AbstractController
     public function track(Order $order  = null):Response
     {
         if($order){
-            return $this->render('lest/track/index.html.twig',[
+            return $this->render($this->getParameter('template').'/track/index.html.twig',[
                 'order'=>$order
             ]);
         }
-        return $this->render('lest/track/index.html.twig');
+        return $this->render($this->getParameter('template').'/track/index.html.twig');
     }
     /**
      * @Route("/help", name="help")
      */
     public function help():Response
     {
-        return $this->render('lest/help.html.twig');
+        return $this->render($this->getParameter('template').'/help.html.twig');
     }
     /**
      * @Route("/faq", name="faq")
      */
     public function faq():Response
     {
-        return $this->render('lest/faq.html.twig');
+        return $this->render($this->getParameter('template').'/faq.html.twig');
     }
     /**
      * @Route("/change-lang/{locale}", name="lang")

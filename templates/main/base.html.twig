@@ -8,9 +8,15 @@
     <meta content="eCommerce" name="keywords">
     <meta content="eCommerce" name="description">
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <!-- CSS Libraries -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lest/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/magnific-popup/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/store.css') }}">
     {{ encore_entry_link_tags('app') }}
 </head>
 
@@ -53,6 +59,13 @@
         </div>
     </main>
     <footer></footer>
+    {% block foot %}{% endblock %}
+        <!-- sweetalert2 -->
+    <script type="application/javascript" src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script type="application/javascript" src="{{asset('js/admin.js') }}"></script>
+    <script src="{{asset('js/article.js') }}"></script>
+    <script src="{{asset('js/store.js') }}"></script>
+    <script src="{{asset('js/util.js') }}"></script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

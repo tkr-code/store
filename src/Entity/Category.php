@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @UniqueEntity(
  *  fields="title",
- *  message="Cette categorie existe "
+ *  message="Cette catégorie existe ! "
  * )
  * @ApiResource()
  */

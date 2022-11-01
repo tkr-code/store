@@ -1,7 +1,7 @@
 {% extends "email/base.html.twig" %}
 {% import "macros/etats.html.twig" as etats %}
 {% block title %}Facture #{{order.number}}{% endblock %}
-{% block body %}
+{% block main %}
 <p>Bonjour {{ order.user.personne.fullName }}</p>
 <p>Il s'agit d'un reçu de paiement envoyée le {{ date()|date_format_fr }}  </p>
 {% include "email/_order.html.twig" %}

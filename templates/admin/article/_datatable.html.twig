@@ -19,7 +19,7 @@
                     <img src="{{ asset('img/article/vide.png') }}" width="50px" alt="">
                 {% endfor %}
                 <a class="c-1" href="{{ path('article_show',{id: item.id} ) }}">
-                    #{{ item.id}} {{ item.title}} 
+                    #{{ item.ref}} {{ item.title}} 
                 </a>
                 <p>{{ etats.articleLabel(item.label) }} 
                 {{ etats.etat(item.etat) }} 

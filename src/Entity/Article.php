@@ -20,6 +20,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  collectionOperations={"get"},
  *  itemOperations={"get"}
  * )
+ * @UniqueEntity(
+ *  fields="ref",
+ *  message="Cette référence existe ! "
+ * )
  */
 class Article
 {
@@ -159,6 +163,11 @@ class Article
      * @ORM\Column(type="string", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ref;
 
 
     public function __construct()
@@ -523,6 +532,18 @@ class Article
     {
         $this->status = $status;
 
+        return $this;
+    }
+
+    public function getRef(): ?string
+    {
+        return $this->ref;
+    }
+
+    public function setRef(string $ref): self
+    {
+        $ref = sprintf("%04s", $ref);
+        $this->ref = $ref;
         return $this;
     }
 

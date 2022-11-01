@@ -112,7 +112,7 @@ class CartController extends AbstractController
         $deliverySpace = new DeliverySpace();
         $formDeliverySpace = $this->createForm(DeliverySpaceType::class, $deliverySpace);
         $formDeliverySpace->handleRequest($request);
-        return $this->renderForm('lest/cart/index.html.twig',[
+        return $this->renderForm($this->getParameter('template').'/cart/index.html.twig',[
             'items'=>$cartService->getFullCart(),
             'total'=>$cartService->getTotal(),
             'form'=>$form,

@@ -60,7 +60,7 @@ class ContactController extends AbstractController
                 $this->addFlash('errors','Une erreur est survenu');
               }
         }
-        return $this->renderForm('lest/contact/index.html.twig', [
+        return $this->renderForm($this->getParameter('template').'/contact/index.html.twig', [
             'form_contact' =>$formContact
         ]);
     }

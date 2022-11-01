@@ -1,9 +1,9 @@
-{% extends 'lest/base.html.twig' %}
+{% extends site.base ~ '/base.html.twig' %}
 
 {% block title %}{{'Reset your password'|trans}}{% endblock %}
 
 {% block main %}
-<main class="main">
+
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
         <div class="container">
             <ol class="breadcrumb">
@@ -38,6 +38,4 @@
     </div>
 
     </div>
-</main>
-
 {% endblock %}

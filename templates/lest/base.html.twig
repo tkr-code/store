@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{ asset('css/lest/util.css') }}">
     <link rel="stylesheet" href="{{ asset('css/skin-lest-3.css') }}">
     <link rel="stylesheet" href="{{ asset('css/lest-3.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/store.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/nouislider/nouislider.css') }}">
     {% block head %}{% endblock %}
 </head>
@@ -46,7 +47,7 @@
 <body>
     <div id="loader-app">
         <div class="loader-app">
-            <img width="40%" src="{{ asset('img/icons/logo-lest.png') }}" class="d-block mx-auto" alt="">
+            <img width="40%" src="{{ asset('img/icons/' ~ site.path_logo) }}" class="d-block mx-auto" alt="">
             chargement...
         </div>
     </div>
@@ -696,11 +697,11 @@
     <script type="application/javascript" src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script type="application/javascript" src="{{asset('js/admin.js') }}"></script>
     <!-- Main JS File -->
-    <script type="application/javascript" src="{{asset('js/lest/main.js') }}"></script>
-    <script type="application/javascript" src="{{asset('js/article.js') }}"></script>
-    <script type="application/javascript" src="{{asset('js/store.js') }}"></script>
-    <script type="application/javascript" src="{{asset('js/lest/demos/demo-3.js') }}"></script>
-    <script type="application/javascript" src="{{asset('js/util.js') }}"></script>
+    <script src="{{asset('js/lest/main.js') }}"></script>
+    <script src="{{asset('js/article.js') }}"></script>
+    <script src="{{asset('js/store.js') }}"></script>
+    <script src="{{asset('js/lest/demos/demo-3.js') }}"></script>
+    <script src="{{asset('js/util.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).on('click', '#btn-product-gallery', function (e) {

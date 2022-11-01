@@ -1,4 +1,4 @@
-{% extends "lest/base.html.twig" %}
+{% extends "main/base.html.twig" %}
 
 {% if app.request.session.get('shipping') %}
 {% set delivery = app.request.session.get('shipping') %}
@@ -7,7 +7,7 @@
 {% block title %}{{'Cart'|trans}}
 {% endblock %}
 
-{% block main %}
+{% block body %}
 <style>
     .product-col {
   width: 280px;

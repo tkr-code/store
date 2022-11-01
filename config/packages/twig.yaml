@@ -11,10 +11,11 @@ twig:
         parentCategorys: '@App\Twig\CategoryParentExtention'
         gg_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
         site:
+            base: 'dev'
             version: '1.0' 
             name: 'store'
             email: 'contact@store.sn'
-            path_logo: 'lest-logo.png'
+            path_logo: 'logo-lest.png'
             current_name: 'F CFA'
             current: 'XOF'
             phone_number_1: '+221 77 801 06 46'

@@ -83,15 +83,13 @@ class ArticleController extends AbstractController
             $isComment = $commentRepository->isComment($user,$article);
         }
 
-        
-
         $pagination = $paginatorInterface->paginate(
             $articleRepository->showPagination(),
             $request->query->getInt('page',1),
             1
         );
 
-        return $this->renderForm('lest/shop/show.html.twig', [
+        return $this->renderForm($this->getParameter('template').'/shop/show.html.twig', [
             'article'=>$article,
             'articles'=>$articleRepository->findBy(['enabled'=>true,'etat'=>'top'],null,12),
             'form' => $form,

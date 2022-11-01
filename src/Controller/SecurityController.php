@@ -37,7 +37,7 @@ class SecurityController extends AbstractController
         $user = new User();
         $registrationForm = $this->createForm(RegistrationFormType::class,$user);
 
-        return $this->renderForm('security/lest.html.twig', [
+        return $this->renderForm('security/index.html.twig', [
             'last_username' => $lastUsername, 
             'error' => $error,
             'users'=>$userRepository->findAll(),

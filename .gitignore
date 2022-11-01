@@ -8,6 +8,7 @@
 /public/adminlte/
 /migrations/
 /var/
+/molla/
 /vendor/
 /list de produit
 ###< symfony/framework-bundle ###

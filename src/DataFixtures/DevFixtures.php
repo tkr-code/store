@@ -2,8 +2,10 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Client;
+use App\Entity\Article;
 use App\Entity\Personne;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,22 +23,27 @@ class DevFixtures extends Fixture
     }
     public function load(ObjectManager $manager)
     {
-        // $user = new User();
-        // $personne = new Personne();
-        // $personne->setFirstName('client')
-        // ->setLastName('Test');
-        // $user->setEmail('clienttest@lest.sn');
-        // $user->setStatus('Activer');
-        // $user->setCle('123456');
-        // $user->setPhoneNumber('770000000');
-        // $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
-        // ->setRoles(['ROLE_CLIENT'])
-        // ->setPersonne($personne);
-        // $client = new Client();
-        // $client->setUser($user);
-        // $user->setClient($client);
-        // $this->addReference('client_test',$user);
-        // $this->em->persist($user);
+        
+        // for ($i=0; $i < 10; $i++){
+        //     $category  = $this->getReference(('category_'.str_replace(' ','_','Ordinateur portable')));
+        //     for ($i= 0 ; $i < 100; $i++) {
+        //         $detail = isset($value['detail']) ? $value['detail']:'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae consequatur dicta';
+        //     $article  = new Article();
+        //     $article->setTitle($value['title'])
+        //     ->setCreatedAt(new DateTime())
+        //     ->setCategory($category)
+        //     ->setBuyingPrice($value['buy'])
+        //     ->setPrice($value['price'])
+        //     ->setEnabled(true)
+        //     ->setEtat($value['etat'])
+        //     ->setDescription($detail)
+        //     ->setQuantity(10)
+        //     ->setStatus('Neuf')
+        //     ->setQtyReel(10);
+        //     $this->addReference('_article_'. str_replace(' ','_', $value['title']),$article);
+        //     $manager->persist($article);
+        //     }
+        // }
 
         // $manager->flush();
     }

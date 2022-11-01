@@ -82,7 +82,6 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
             //on recupere les images transmise
             $images = $form->get('images')->getData();
@@ -106,6 +105,8 @@ class ArticleController extends AbstractController
             $idBrand = $request->request->get('brand');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
+            $entityManager->flush();
+            $article->setRef($article->getId());
             $entityManager->flush();
             $message = $translator->trans('Article cree');
             $this->addFlash('success', "L'article a été crée.");
