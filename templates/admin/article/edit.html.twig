@@ -22,137 +22,222 @@ name:'Listes des articles'
 {% block body %}
 {% include "includes/_alerte.html.twig" %}
 <div class="row">
-	<div class="col-md-12">
-		<div class="card card-outline card-primary">
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-12">
+				<!-- Custom Tabs -->
+				<div class="card card-outline card-primary">
+					<div class="card-header d-flex p-0">
+						<h3 class="card-title p-3">Modifier un article
+							<a href="{{ path('article_new') }}" class="btn btn-primary">Ajouter</a>
+						</h3>
+						<ul class="nav nav-pills ml-auto p-2">
+							<li class="nav-item">
+								<a class="nav-link active" href="#tab_1" data-toggle="tab">Information</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#tab_2" data-toggle="tab">Caractéristiques</a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_1">
+								{{ form_start(form) }}
+								<div class="row">
+									<div class="col-lg-4 col-12">
+										{{form_row(form.ref)}}
+									</div>
+									<div class="col-lg-8 col-12">
+										{{form_row(form.title)}}
+									</div>
+									<div class="col-12">
+										{{form_row(form.detail)}}
+									</div>
+									<div class="col-12">
+										{{form_row(form.description)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.buyingPrice)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.price)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.quantity)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.qty_reel)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.reduction)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.category)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.brand)}}
+									</div>
+									<div class="col-lg-4">
+										{{form_row(form.label)}}
+									</div>
+									<div class="col-lg-4 col-12">
+										{{form_row(form.etat)}}
+									</div>
+									<div class="col-lg-4 col-12">
+										{{form_row(form.status)}}
+									</div>
+									<div class="col-lg-4 col-12">
+										{{form_row(form.images)}}
+									</div>
+
+									<div class="col-lg-12 col-12">
+										{{form_row(form.enabled)}}
+									</div>
+									<div class="gallery">
+										<p class="text-center">Prévisualisez vos images</p>
+									</div>
+									<div class="col-lg-12">
+										<div class="row gallery-2">
+											{% for image in article.images %}
+											<div class="col-lg-3 col-md-4 col-xs-6">
+												<img src="{{ asset('img/article/' ~ image.name)}}"
+													class="zoom img-fluid " alt="">
+												<a class="btn btn-image-delete position-absolute btn-image-delete text-danger text-center"
+													href="{{ path('article_delete_image', {id: image.id}) }}"
+													data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
+													<i class="fa fa-window-close"></i>
+												</a>
+											</div>
+											{% else %}
+											<div class="col-md-12 col-12">
+												<p class="font-weight-bold text-center">L'article ne possede pas
+													d'image</p>
+											</div>
+											{% endfor %}
+										</div>
+										<div class="btn-group">
+											<button class="btn btn-primary">
+												<i class="fas fa-save"></i>
+												{{ button_label|default('Save') }}</button>
+										</div>
+									</div>
+								</div>
+								{{ form_widget(form) }}
+								{{ form_end(form) }}
+								{% if is_granted('ROLE_ADMIN') %}
+								<hr>
+								{{ include('admin/article/_delete_form.html.twig') }}
+								{% endif %}
+							</div>
+							<!-- /.tab-pane -->
+							<div class="tab-pane " id="tab_2">
+								{% include "includes/article/article_option/table.html.twig" %}
+							</div>
+							<!-- /.tab-pane -->
+							<div class="tab-pane" id="tab_3"></div>
+							<!-- /.tab-pane -->
+						</div>
+						<!-- /.tab-content -->
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- ./card -->
+			</div>
+
+		</div>
+		<div class="card card-primary card-outline">
 			<div class="card-header">
-				<div class="card-title">{{ 'Edit Article'|trans }}</div>
+				<h3 class="card-title">
+					<i class="fas fa-edit"></i>
+					Données produit
+				</h3>
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-9 col-12">
-						<!-- Custom Tabs -->
-						<div class="card">
-							<div class="card-header d-flex p-0">
-								<h3 class="card-title p-3">Modifier un article</h3>
-								<ul class="nav nav-pills ml-auto p-2">
-									<li class="nav-item">
-										<a class="nav-link active" href="#tab_1" data-toggle="tab">Information</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#tab_2" data-toggle="tab">Caractéristiques</a>
-									</li>
-								</ul>
-							</div>
-							<div class="card-body">
-								<div class="tab-content">
-									<div class="tab-pane active" id="tab_1">
-										{{ form_start(form) }}
-										<div class="row">
-											<div class="col-lg-4">
-												{{form_row(form.ref)}}
-											</div>
-											<div class="col-lg-7">
-												{{form_row(form.title)}}
-											</div>
-											<div class="col-lg-7">
-												{{form_row(form.description)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.buyingPrice)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.price)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.quantity)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.qty_reel)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.reduction)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.category)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.brand)}}
-											</div>
-											<div class="col-lg-4">
-												{{form_row(form.label)}}
-											</div>
-											<div class="col-lg-4 col-12">
-												{{form_row(form.etat)}}
-											</div>
-											<div class="col-lg-4 col-12">
-												{{form_row(form.status)}}
-											</div>
-											<div class="col-lg-4 col-12">
-												{{form_row(form.images)}}
-											</div>
-
-											<div class="col-lg-12 col-12">
-												{{form_row(form.enabled)}}
-											</div>
-											<div class="gallery">
-												<p class="text-center">Prévisualisez vos images</p>
-											</div>
-											<div class="col-lg-12">
-												<div class="row gallery-2">
-													{% for image in article.images %}
-													<div class="col-lg-3 col-md-4 col-xs-6">
-														<img src="{{ asset('img/article/' ~ image.name)}}"
-															class="zoom img-fluid " alt="">
-														<a class="btn btn-image-delete position-absolute btn-image-delete text-danger text-center"
-															href="{{ path('article_delete_image', {id: image.id}) }}"
-															data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
-															<i class="fa fa-window-close"></i>
-														</a>
-													</div>
-													{% else %}
-													<div class="col-md-12 col-12">
-														<p class="font-weight-bold text-center">L'article ne possede pas
-															d'image</p>
-													</div>
-													{% endfor %}
-												</div>
-												<div class="btn-group">
-													<button class="btn btn-primary">
-														<i class="fas fa-save"></i>
-														{{ button_label|default('Save') }}</button>
-												</div>
-											</div>
-										</div>
-										{{ form_widget(form) }}
-										{{ form_end(form) }}
-										{% if is_granted('ROLE_ADMIN') %}
-										<hr>
-										{{ include('admin/article/_delete_form.html.twig') }}
-										{% endif %}
-									</div>
-									<!-- /.tab-pane -->
-									<div class="tab-pane " id="tab_2">
-										{% include "includes/article/article_option/table.html.twig" %}
-									</div>
-									<!-- /.tab-pane -->
-									<div class="tab-pane" id="tab_3"></div>
-									<!-- /.tab-pane -->
-								</div>
-								<!-- /.tab-content -->
-							</div>
-							<!-- /.card-body -->
+					<div class="col-5 col-sm-3">
+						<div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
+							aria-orientation="vertical">
+							<a class="nav-link" id="vert-tabs-general-tab" data-toggle="pill" href="#vert-tabs-general"
+								role="tab" aria-controls="vert-tabs-general" aria-selected="false">
+								<i class="fa fa-wrench" aria-hidden="true"></i> Général</a>
+							<a class="nav-link" id="vert-tabs-inventaire-tab" data-toggle="pill"
+								href="#vert-tabs-inventaire" role="tab" aria-controls="vert-tabs-inventaire"
+								aria-selected="false">
+								<i class="fas fa-inventory"></i>
+								Inventaire</a>
+							<a class="nav-link" id="vert-tabs-expedition-tab" data-toggle="pill"
+								href="#vert-tabs-expedition" role="tab" aria-controls="vert-tabs-expedition"
+								aria-selected="false">Expedition</a>
+							<a class="nav-link active" id="vert-tabs-produits-lie-tab" data-toggle="pill"
+								href="#vert-tabs-produits-lie" role="tab" aria-controls="vert-tabs-produits-lie"
+								aria-selected="true">Produits-lié</a>
 						</div>
-						<a class="btn btn-dark" href="{{ path('article_index') }}">
-							<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-							{{'back to list'|trans}}</a>
-						<!-- ./card -->
 					</div>
-					<div class="col-md-3">
-						{% include "includes/article/aides.html.twig" %}
+					<div class="col-7 col-sm-9">
+						<div class="tab-content" id="vert-tabs-tabContent">
+							<div class="tab-pane text-left fade" id="vert-tabs-home" role="tabpanel"
+								aria-labelledby="vert-tabs-general-tab">
+								General
+							</div>
+							<div class="tab-pane fade" id="vert-tabs-inventaire" role="tabpanel"
+								aria-labelledby="vert-tabs-inventaire-tab">
+								Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus
+								ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur
+								adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+								posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula
+								placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet
+								ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+							</div>
+							<div class="tab-pane fade" id="vert-tabs-expedition" role="tabpanel"
+								aria-labelledby="vert-tabs-expedition-tab">
+								Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus
+								volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce
+								nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue
+								ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur
+								eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur,
+								ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex
+								vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus.
+								Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+							</div>
+							<div class="tab-pane fade active show" id="vert-tabs-produits-lie" role="tabpanel"
+								aria-labelledby="vert-tabs-produits-lie-tab">
+								Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus
+								turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis
+								vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum
+								pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget
+								aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac
+								habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!-- /.card -->
 		</div>
+	</div>
+	<style>
+		.font-secondary {
+			font-size: 12px;
+		}
+	</style>
+	<div class="col-md-3">
+		{% include "includes/article/aides.html.twig" %}
+		{# <div class="card callout callout-success">
+			<h5>
+				<i class="icon fas fa-exclamation-triangle"></i>
+				Publier
+			</h5>
+			<div class="card-body font-secondary">
+				<p> <i class="fa fa-key" aria-hidden="true"></i> Etat : {{ article.status }} </p>
+				<p> <i class="fa fa-calendar"></i> Publie le : {{ article.createdAt ? article.createdAt|date_format_fr
+					:'' }} <a type="button" href="#">Modifier</a></p>
+				<div>
+					<input type="date">
+				</div>
+			</div>
+
+		</div> #}
 	</div>
 </div>
 {% endblock %}

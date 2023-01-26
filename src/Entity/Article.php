@@ -169,6 +169,10 @@ class Article
      */
     private $ref;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $detail;
 
     public function __construct()
     {
@@ -546,5 +550,15 @@ class Article
         $this->ref = $ref;
         return $this;
     }
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
 
+    public function setDetail(string $detail): self
+    {
+        $this->detail = $detail;
+
+        return $this;
+    }
 }

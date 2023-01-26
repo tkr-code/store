@@ -50,10 +50,14 @@ class Category
     private $is_active;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ParentCategory::class, inversedBy="categorys")
+     * @ORM\ManyToOne(targetEntity=Category2::class, inversedBy="categorys")
      */
-    private $parentCategory;
+    private $category2;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
 
     public function __construct()
@@ -73,10 +77,17 @@ class Category
         return $this->title;
     }
     public function getSlug()
+    {   
+        return $this->slug;
+    }
+    public function setSlug(string $slug): self
     {
         $Slugify = new Slugify();
-        
-        return $Slugify->slugify($this->title);
+        $slug  = $Slugify->slugify($slug);
+
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function setTitle(string $title): self
@@ -136,14 +147,14 @@ class Category
         return $this->categories;
     }
 
-    public function getParentCategory(): ?ParentCategory
+    public function getCategory2(): ?Category2
     {
-        return $this->parentCategory;
+        return $this->category2;
     }
 
-    public function setParentCategory(?ParentCategory $parentCategory): self
+    public function setCategory2(?Category2 $category2): self
     {
-        $this->parentCategory = $parentCategory;
+        $this->category2 = $category2;
 
         return $this;
     }

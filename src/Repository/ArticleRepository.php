@@ -27,7 +27,7 @@ class ArticleRepository extends ServiceEntityRepository
      * @param  mixed $var
      * @return void
      */
-    public function search($mots=null, $category=null, $min=null, $max= null, $brand = null, $etat = null)
+    public function search($mots=null, $category3 = null , $category2 = null, $category=null, $min=null, $max= null, $brand = null, $etat = null,$order =[])
     {
         $query = $this->findQueryBuilder()
         ->AndWhere('p.enabled = true');
@@ -59,8 +59,28 @@ class ArticleRepository extends ServiceEntityRepository
         }
         if($category != null){
             $query->leftJoin('p.category', 'c');
-            $query->andWhere('c.title = :title')
+            $query->andWhere('c.title = :title');
+            $query->andWhere('c.is_active = 1')
             ->setParameter('title',$category);
+        }else{
+            $query->leftJoin('p.category', 'c');
+            $query->andWhere('c.is_active = 1');
+        }
+
+        if($category3 != null){
+            $query->leftJoin('p.category', 'c');
+            $query->leftJoin('c.category2', 'c2');
+            $query->leftJoin('c2.category3', 'c3');
+            $query->andWhere('c3.slug = :slug')
+            ->setParameter('slug',$category3);
+        } 
+        if($category2 != null){
+            $query->leftJoin('p.category', 'c');
+            $query->leftJoin('c.category2', 'c2');
+            $query->andWhere("c2.slug = 'ordinateurs-portable-et-ordinateur'");
+        }
+        if(!empty($order)){
+            $query->orderBy('p.'.$order[0],$order[1]);
         } 
         return $query->getQuery();
     }

@@ -1,6 +1,4 @@
-{% extends site.base ~ "/base.html.twig" %}
-
-{% block main %}
+{% extends base ~"/base.html.twig" %} {% block main %}
 <style>
     .card {
         z-index: 0;
@@ -125,6 +123,7 @@
     }
 </style>
 <main class="main">
+    {% include base ~"/_icon-boxes.html.twig" %}
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
         <div class="container">
             <ol class="breadcrumb">

@@ -1,0 +1,1160 @@
+{% set route_name = app.request.get('_route') %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}{{ app_name }} Sénégal - Boutique de vente en ligne {% endblock %} - {{ app_name }}
+    </title>
+    <meta name="keywords" content="Boutique Dakar Sénégal">
+    <meta name="description" content="{{ app_name }} - Boutique de vente en ligne">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    {#
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png"> #}
+    {#
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png"> #}
+    {#
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png"> #}
+    {#
+    <link rel="manifest" href="assets/images/icons/site.html"> #}
+    <link rel="mask-icon" href="{{ asset('assets/images/icons/safari-pinned-tab.svg') }}" color="#666666">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    <meta name="apple-mobile-web-app-title" content="{{ app_name }}">
+    <meta name="application-name" content="{{ app_name }}">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="{{ asset('assets/images/icons/browserconfig.xml') }}">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet"
+        href="{{ asset('assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery.countdown.css') }}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    {% if app.request.get('_route') == 'home' %}
+    <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-14.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/demos/demo-14.css') }}">
+    {% endif %}
+    <link rel="stylesheet" href="{{ asset('css/lesekoya.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/store.css') }}">
+    {{ encore_entry_link_tags('app') }}
+</head>
+<style>
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary.focus,
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .show>.btn-primary.dropdown-toggl {
+        background-color: #222;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #01796F;
+        border-color: #01796F;
+        box-shadow: none;
+    }
+
+    .btn-outline-primary-2 {
+        color: #01796F;
+        border-color: #01796F;
+    }
+
+    .header-14 .dropdown.category-dropdown .dropdown-toggle {
+        background-color: #01796F;
+    }
+
+    .header-14 .dropdown.category-dropdown .dropdown-toggle {
+        color: #fff !important;
+    }
+
+    .menu li:hover>a,
+    .menu li.show>a,
+    .menu li.active>a {
+        color: #01796F;
+    }
+
+    .header-14 .header-search .header-search-wrapper {
+        border-color: #01796F;
+    }
+
+    .header-14 .header-bottom .menu>li>a::before {
+        background-color: #01796F !important;
+    }
+
+    .header-top a:hover,
+    .header-top a:focus {
+        color: #01796F;
+    }
+
+    .header-14 .compare-dropdown:hover .compare-txt,
+    .header-14 .compare-dropdown:focus .compare-txt {
+        color: #01796F;
+    }
+
+    .header-14 .cart-dropdown:hover .dropdown-toggle,
+    .header-14 .cart-dropdown.show .dropdown-toggle,
+    .header-14 .compare-dropdown:hover .dropdown-toggle,
+    .header-14 .compare-dropdown.show .dropdown-toggle {
+        color: #01796F;
+    }
+
+    .btn-outline-primary-2:hover,
+    .btn-outline-primary-2:focus,
+    .btn-outline-primary-2.focus,
+    .btn-outline-primary-2:not(:disabled):not(.disabled):active,
+    .btn-outline-primary-2:not(:disabled):not(.disabled).active,
+    .show>.btn-outline-primary-2.dropdown-toggle {
+        background-color: #01796F;
+        border-color: #01796F;
+    }
+
+    .wishlist-link .wishlist-count {
+        background-color: #01796F;
+    }
+
+    .wishlist-link:hover,
+    .wishlist-link:focus {
+        color: #01796F;
+    }
+
+    .header-14 .wishlist-link:hover .wishlist-txt,
+    .header-14 .wishlist-link:focus .wishlist-txt {
+        color: #01796F;
+    }
+
+    .header-14 .cart-dropdown:hover .cart-txt,
+    .header-14 .cart-dropdown:focus .cart-txt {
+        color: #01796F;
+    }
+
+    .cart-dropdown .cart-count {
+        background-color: #01796F;
+    }
+
+    .cart-dropdown .product-title a:hover,
+    .cart-dropdown .product-title a:focus {
+        /* color: #222; */
+    }
+
+    label.required {
+        color: #666;
+        font-weight: 300;
+        font-size: 1.4rem;
+        margin: 0 0 1.1rem
+    }
+    .owl-simple .owl-dots .owl-dot.active span {
+    width: 18px;
+    border-color: #01796F;
+    background: #01796F;
+    }
+    .owl-simple .owl-dots .owl-dot span {
+    border-color: #222;
+    background: #222;
+}
+.owl-simple .owl-dots .owl-dot:hover span {
+    border-color: #222;
+    background: #222;
+    }
+</style>
+
+<body>
+    <div id="loader-app">
+        <div class="loader-app">
+            <img width="40%" src="{{ asset('img/' ~ site.path_logo) }}" class="d-block mx-auto" alt="">
+            chargement...
+        </div>
+    </div>
+    <div class="js-loader js-loader-hide">
+        <div class="text-center js-loader-content">
+            <div class="spinner-border d-inline-block" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <p class="js-loader-text">Chargement...</p>
+        </div>
+    </div>
+    <div class="page-wrapper">
+        <header class="header header-14">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="tel:{{ site.tel_1 }}"><i class="icon-phone"></i>Call: 
+                            +{{ site.tel_1|phone_format}}</a>
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right">
+
+                        <ul class="top-menu">
+                            <li>
+                                <a href="#">Link</a>
+                                <ul>
+                                    {% if not is_granted('ROLE_CLIENT') %}
+                                    <li>
+                                        <a href="#signin-modal" data-toggle="modal">
+                                            Identifiez-vous / Créer un compte</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul><!-- End .top-menu -->
+                    </div><!-- End .header-right -->
+                </div><!-- End .container -->
+            </div><!-- End .header-top -->
+
+            <div class="header-middle">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-auto col-lg-3 col-xl-3 col-xxl-2">
+                            <button class="mobile-menu-toggler">
+                                <span class="sr-only">{{'Toggle mobile menu'|trans}}</span>
+                                <i class="icon-bars"></i>
+                            </button>
+                            <a href="/" class="logo">
+                                <img src="{{ asset('img/' ~ site.path_logo )}}" alt="{{ app_name }} Logo" width="105"
+                                    height="25">
+                            </a>
+                        </div><!-- End .col-xl-3 col-xxl-2 -->
+
+                        <div class="col col-lg-9 col-xl-9 col-xxl-10 header-middle-right">
+                            <div class="row">
+                                <div class="col-lg-8 col-xxl-4-5col d-none d-lg-block">
+                                    <div
+                                        class="header-search header-search-extended header-search-visible header-search-no-radius">
+                                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                                        <form action="{{ path('articles') }}" method="get">
+                                            <div class="header-search-wrapper search-wrapper-wide">
+
+                                                <div class="select-custom">
+                                                    <select id="cat" name="cat">
+                                                        <option value="">All Departments</option>
+                                                        <option value="1">Fashion</option>
+                                                        <option value="2">- Women</option>
+                                                        <option value="3">- Men</option>
+                                                        <option value="4">- Jewellery</option>
+                                                        <option value="5">- Kids Fashion</option>
+                                                        <option value="6">Electronics</option>
+                                                        <option value="7">- Smart TVs</option>
+                                                        <option value="8">- Cameras</option>
+                                                        <option value="9">- Games</option>
+                                                        <option value="10">Home &amp; Garden</option>
+                                                        <option value="11">Motors</option>
+                                                        <option value="12">- Cars and Trucks</option>
+                                                        <option value="15">- Boats</option>
+                                                        <option value="16">- Auto Tools &amp; Supplies</option>
+                                                    </select>
+                                                </div><!-- End .select-custom -->
+                                                <label for="q" class="sr-only">{{'Search'|trans}}</label>
+                                                <input type="search" class="form-control" name="mots" id="q"
+                                                    placeholder="Search product ..." required>
+
+                                                <button class="btn btn-primary" type="submit"><i
+                                                        class="icon-search"></i></button>
+                                            </div><!-- End .header-search-wrapper -->
+                                        </form>
+                                    </div><!-- End .header-search -->
+                                </div><!-- End .col-xxl-4-5col -->
+
+                                <div class="col-lg-4 col-xxl-5col d-flex justify-content-end align-items-center">
+                                    <div class="header-dropdown-link">
+                                        {% if is_granted('ROLE_CLIENT') %}
+                                        <a href="{{ path('favoris_index') }}" class="wishlist-link">
+                                            <i class="icon-heart-o"></i>
+                                            <span class="wishlist-count">
+                                                {{ app.user.favoris|length}}
+                                            </span>
+                                            <span class="wishlist-txt">{{'Wishlist'|trans}}</span>
+                                        </a>
+                                        {% else %}
+                                        <a href="#" class="wishlist-link js-favoris-login">
+                                            <i class="icon-heart-o"></i>
+                                            <span class="wishlist-count">0</span>
+                                            <span class="wishlist-txt">{{'Wishlist'|trans}}</span>
+                                        </a>
+                                        {% endif %}
+
+                                        <div class="dropdown cart-dropdown js-cart-load">
+                                            {% include "includes/cart/_load.html.twig" %}
+                                            <!-- End .dropdown-menu -->
+                                        </div>
+                                    </div>
+                                </div><!-- End .col-xxl-5col -->
+                            </div><!-- End .row -->
+                        </div><!-- End .col-xl-9 col-xxl-10 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .header-middle -->
+
+            <div class="header-bottom sticky-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-auto col-lg-3 col-xl-3 col-xxl-2 header-left">
+                            <div class="dropdown category-dropdown {{ ( route_name == 'home') ? 'show':'' }} is-on"
+                                data-visible="true">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" data-display="static"
+                                    title="Browse Categories">
+                                    {{'Browse Categories'|trans}}
+                                </a>
+
+                                <div class="dropdown-menu {{ ( route_name == 'home') ? 'show':'' }}">
+                                    <nav class="side-nav">
+                                        <ul class="menu-vertical sf-arrows">
+                                            {% for item in categories.niveau3 %}
+                                            <li class="megamenu-container">
+                                                <a {{ (item.categorys2|length> 0) ? 'class="sf-with-ul"':'' }} href={{
+                                                    path('articles_category3',{category3:item.slug}) }}><i {{ (item.icon
+                                                        is not null) ? 'class=' ~ item.icon ~ '' :'' }}></i>
+                                                    {{item.title}}
+                                                </a>
+                                                {% if item.categorys2|length > 0 %}
+                                                <div class="megamenu">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-md-8">
+                                                            <div class="menu-col">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+
+                                                                        {% for niveau2 in item.categorys2|slice(0,2) %}
+                                                                        {% if niveau2.categorys|length > 0 or true %}
+                                                                        <div class="menu-title">
+                                                                            {{ niveau2.title }}
+                                                                        </div><!-- End .menu-title -->
+                                                                        <ul>
+                                                                            {% for item3 in niveau2.categorys|slice(0,5)
+                                                                            %}
+                                                                            {% if item3.articles|length > 0 or true %}
+                                                                            <li>
+                                                                                <a href="{{path('articles_category',{
+                                                                                    category3_slug:item3.category2.category3.slug,
+                                                                                    category2_slug:item3.category2.slug,
+                                                                                    category:item3.slug}) }}">
+                                                                                    {{item3.title}}
+                                                                                </a>
+                                                                            </li>
+                                                                            {% endif %}
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                        {% endif %}
+                                                                        {% endfor %}
+                                                                    </div><!-- End .col-md-6 -->
+                                                                    <div class="col-md-6">
+                                                                        {% for niveau2 in item.categorys2|slice(2,4) %}
+                                                                        {% if niveau2.categorys|length > 0 or true %}
+                                                                        <div class="menu-title">
+                                                                            {{ niveau2.title }}
+                                                                        </div><!-- End .menu-title -->
+                                                                        <ul>
+                                                                            {% for item3 in niveau2.categorys|slice(0,5)
+                                                                            %}
+                                                                            {% if item3.articles|length > 0 or true %}
+                                                                            <li>
+                                                                                <a href={{path('articles_category',{
+                                                                                    category3_slug:item3.category2.category3.slug,category2_slug:item3.category2.slug,
+                                                                                    category:item3.slug}) }}>
+                                                                                    {{item3.title}}
+                                                                                </a>
+                                                                            </li>
+                                                                            {% endif %}
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                        {% endif %}
+                                                                        {% endfor %}
+                                                                        {# <div class="menu-title">Cell Phones</div>
+                                                                        <!-- End .menu-title -->
+                                                                        <ul>
+                                                                            <li><a href="#">Carrier Phones</a></li>
+                                                                            <li><a href="#">Unlocked Phones</a></li>
+                                                                            <li><a href="#">Phone & Cellphone Cases</a>
+                                                                            </li>
+                                                                            <li><a href="#">Cellphone Chargers </a></li>
+                                                                        </ul>
+
+                                                                        <div class="menu-title">Digital Cameras</div>
+                                                                        <!-- End .menu-title -->
+                                                                        <ul>
+                                                                            <li><a href="#">Digital SLR Cameras</a></li>
+                                                                            <li><a href="#">Sports & Action Cameras</a>
+                                                                            </li>
+                                                                            <li><a href="#">Camcorders</a></li>
+                                                                            <li><a href="#">Camera Lenses</a></li>
+                                                                            <li><a href="#">Photo Printer</a></li>
+                                                                            <li><a href="#">Digital Memory Cards</a>
+                                                                            </li>
+                                                                            <li><a href="#">Camera Bags, Backpacks &
+                                                                                    Cases</a></li>
+                                                                        </ul> #}
+                                                                    </div><!-- End .col-md-6 -->
+                                                                </div><!-- End .row -->
+                                                            </div><!-- End .menu-col -->
+                                                        </div><!-- End .col-md-8 -->
+
+                                                        <div class="col-md-4">
+                                                            <div class="banner banner-overlay">
+                                                                <a href="#" class="banner banner-menu">
+                                                                    <img src="{{ asset('assets/images/demos/demo-13/menu/banner-1.jpg') }}"
+                                                                        alt="Banner">
+                                                                </a>
+                                                            </div><!-- End .banner banner-overlay -->
+                                                        </div><!-- End .col-md-4 -->
+                                                    </div><!-- End .row -->
+                                                </div><!-- End .megamenu -->
+                                                {% endif %}
+                                            </li>
+                                            {% endfor %}
+                                        </ul><!-- End .menu-vertical -->
+                                    </nav><!-- End .side-nav -->
+                                </div><!-- End .dropdown-menu -->
+                            </div><!-- End .category-dropdown -->
+                        </div><!-- End .col-xl-3 col-xxl-2 -->
+
+                        <div class="col col-lg-6 col-xl-6 col-xxl-8 header-center">
+                            <nav class="main-nav">
+                                <ul class="menu sf-arrows">
+                                    {% if is_granted('ROLE_EDITOR') %}
+                                <li class="">
+                                    <a href="{{ path('admin') }}" class="sf-with-ul">{{'Dashboard'|trans}}</a>
+                                    <ul style="display: none;">
+                                        <li>
+                                            <a href="{{ path('order_index') }}">{{'Order'|trans}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('article_index') }}">{{'Products'|trans}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('admin_client_index') }}">{{'Customers'|trans}}</a>
+                                        </li>
+                                        <li>
+                                            <a id="btn-logout" href="#">{{'Log out'|trans}}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                {% endif %}
+                                    {% if is_granted('ROLE_CLIENT') %}
+                                    <li class="">
+                                        <a href="#" class="sf-with-ul">
+                                            <i class="fas fa-user-circle fa-1x"></i> {{app.user.fullName}}
+                                        </a>
+                                        <ul style="display: none;">
+                                            <li>
+                                                <a href="{{ path('client_index') }}">{{'Dashboard'|trans}}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('client_index',{tab:'orders'}) }}">Commande</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('client_index',{tab:'buy'}) }}">Mes achats</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('client_index',{tab:'details'}) }}">Details du
+                                                    compte</a>
+                                            </li>
+                                            <li>
+                                                <a id="btn-logout" href="#">{{'Log out'|trans}}</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                    <li {{ app.request.get( '_route' )=='home' ? 'class="active"' : '' }}>
+                                        <a href="{{ path('home') }}">{{'Home'|trans}}</a>
+                                    </li>
+                                    <li {{ ( app.request.get( '_route' )=='articles' or app.request.get( '_route'
+                                        )=='articles_category' ) ? 'class="active"' : '' }}>
+                                        <a href="{{ path('articles') }}">{{'Shop'|trans}}</a>
+                                        <div class="megamenu megamenu-md">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-8">
+                                                    <div class="menu-col">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="menu-title">Magasinez</div>
+                                                                <!-- End .menu-title -->
+                                                                <ul>
+                                                                    <li><a href={{path('articles') }}>Tous les
+                                                                            produits</a></li>
+                                                                </ul>
+
+                                                                {# <div class="menu-title">Shop no sidebar</div> #}
+                                                                <!-- End .menu-title -->
+                                                                {# <ul>
+                                                                    <li><a href="category-boxed.html"><span>Shop Boxed
+                                                                                No Sidebar<span
+                                                                                    class="tip tip-hot">Hot</span></span></a>
+                                                                    </li>
+                                                                    <li><a href="category-fullwidth.html">Shop Fullwidth
+                                                                            No Sidebar</a></li>
+                                                                </ul> #}
+                                                            </div><!-- End .col-md-6 -->
+
+                                                            <div class="col-md-6">
+                                                                <div class="menu-title">Catégorie de produit </div>
+                                                                <!-- End .menu-title -->
+                                                                <ul>
+                                                                    <li><a href="#">Product
+                                                                            Category Boxed</a></li>
+                                                                    <li><a href="#"><span>Product
+                                                                                Category Fullwidth<span
+                                                                                    class="tip tip-new">New</span></span></a>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="menu-title">Pages de la boutique</div>
+                                                                <!-- End .menu-title -->
+                                                                <ul>
+                                                                    <li><a
+                                                                            href="{{ path('cart_index') }}">{{'Cart'|trans}}</a>
+                                                                    </li>
+                                                                    <li><a href="#">Checkout</a></li>
+                                                                    <li><a href="#">Wishlist</a></li>
+                                                                    <li><a href="#">My Account</a></li>
+                                                                </ul>
+                                                            </div><!-- End .col-md-6 -->
+                                                        </div><!-- End .row -->
+                                                    </div><!-- End .menu-col -->
+                                                </div><!-- End .col-md-8 -->
+
+                                                <div class="col-md-4">
+                                                    <div class="banner banner-overlay">
+                                                        <a href="#" class="banner banner-menu">
+                                                            <img src="{{ asset('assets/images/menu/banner-1.jpg') }}"
+                                                                alt="Banner">
+
+                                                            <div class="banner-content banner-content-top">
+                                                                <div class="banner-title text-white">Last
+                                                                    <br>Chance<br><span><strong>Sale</strong></span>
+                                                                </div><!-- End .banner-title -->
+                                                            </div><!-- End .banner-content -->
+                                                        </a>
+                                                    </div><!-- End .banner banner-overlay -->
+                                                </div><!-- End .col-md-4 -->
+                                            </div><!-- End .row -->
+                                        </div><!-- End .megamenu megamenu-md -->
+                                    </li>
+                                    <li {{ app.request.get( '_route' )=='contact' ? 'class="active"' : '' }}>
+                                        <a href="{{ path('contact') }}">{{'Contact'|trans}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="sf-with-ul">Pages</a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">About</a>
+                                            </li>
+                                            <li><a href="#">FAQs</a></li>
+                                        </ul>
+                                    </li>
+                                </ul><!-- End .menu -->
+                            </nav><!-- End .main-nav -->
+                        </div><!-- End .col-xl-9 col-xxl-10 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .header-bottom -->
+        </header><!-- End .header -->
+
+        {% block main %}{% endblock %}
+
+        {% block footer %}
+        <footer class="footer">
+            <div class="cta cta-horizontal cta-horizontal-box bg-dark bg-image"
+                style="background-image: url('assets/images/demos/demo-14/bg-1.jpg');">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 offset-xl-2">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 cta-txt">
+                                    <h3 class="cta-title text-primary">Join Our Newsletter</h3><!-- End .cta-title -->
+                                    <p class="cta-desc text-light">Subcribe to get information about products and
+                                        coupons</p><!-- End .cta-desc -->
+                                </div><!-- End .col-lg-5 -->
+
+                                <div class="col-lg-7">
+                                    <form action="#">
+                                        <div class="input-group">
+                                            <input type="email" class="form-control"
+                                                placeholder="Enter your Email Address" aria-label="Email Adress"
+                                                required>
+                                            <div class="input-group-append">
+                                                <button class="btn" type="submit">Subscribe</button>
+                                            </div><!-- .End .input-group-append -->
+                                        </div><!-- .End .input-group -->
+                                    </form>
+                                </div><!-- End .col-lg-7 -->
+                            </div><!-- End .row -->
+                        </div><!-- End .col-xl-8 offset-2 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .cta -->
+            <div class="footer-middle border-0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4">
+                            <div class="widget widget-about">
+                                <img src="{{ asset('img/' ~ site.path_logo ) }}" class="footer-logo" alt="Footer Logo"
+                                    width="105" height="25">
+                                <p>{{ site.desc }}</p>
+
+                                <div class="widget-about-info">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4">
+                                            <span class="widget-about-title">Got Question? Call us 24/7</span>
+                                            <a href="tel:{{ site.tel_1 }}">+{{ site.tel_1 }}</a>
+                                        </div><!-- End .col-sm-6 -->
+                                        <div class="col-sm-6 col-md-8">
+                                            <span class="widget-about-title">{{'Payment Method'|trans}}</span>
+                                            <figure class="footer-payments">
+                                                <img src="{{ asset('assets/images/payments.png') }}"
+                                                    alt="Payment methods" width="272" height="20">
+                                            </figure><!-- End .footer-payments -->
+                                        </div><!-- End .col-sm-6 -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .widget-about-info -->
+                            </div><!-- End .widget about-widget -->
+                        </div><!-- End .col-sm-12 col-lg-4 -->
+
+                        <div class="col-sm-4 col-lg-2">
+                            <div class="widget">
+                                <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="about.html">About {{ app_name }}</a></li>
+                                    <li><a href="#">How to shop on {{ app_name }}</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Contact us</a></li>
+                                    <li><a href="#">Log in</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-4 col-lg-2 -->
+
+                        <div class="col-sm-4 col-lg-2">
+                            <div class="widget">
+                                <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="#">Payment Methods</a></li>
+                                    <li><a href="#">Money-back guarantee!</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Shipping</a></li>
+                                    <li><a href="#">Terms and conditions</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-4 col-lg-2 -->
+
+                        <div class="col-sm-4 col-lg-2">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="#">Sign In</a></li>
+                                    <li><a href="#">View Cart</a></li>
+                                    <li><a href="#">My Wishlist</a></li>
+                                    <li><a href="#">Track My Order</a></li>
+                                    <li><a href="#">Help</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-4 col-lg-2 -->
+
+                        <div class="col-sm-4 col-lg-2">
+                            <div class="widget widget-newsletter">
+                                <h4 class="widget-title">Sign Up to Newsletter</h4><!-- End .widget-title -->
+
+                                <p>Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan.</p>
+
+                                <form action="#">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" placeholder="Enter your Email Address"
+                                            aria-label="Email Adress" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-dark" type="submit"><i
+                                                    class="icon-long-arrow-right"></i></button>
+                                        </div><!-- .End .input-group-append -->
+                                    </div><!-- .End .input-group -->
+                                </form>
+                            </div><!-- End .widget -->
+                        </div><!-- End .col-sm-4 col-lg-2 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .footer-middle -->
+
+            <div class="footer-bottom">
+                <div class="container-fluid">
+                    <p class="footer-copyright">Copyright © <span id="year"></span> {{ app_name }}.
+                        {{'All Rights Reserved'|trans}}.</p>
+                    <!-- End .footer-copyright -->
+                    <div class="social-icons social-icons-color">
+                        <span class="social-label">Social Media</span>
+                        <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i
+                                class="icon-facebook-f"></i></a>
+                        <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i
+                                class="icon-twitter"></i></a>
+                        <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i
+                                class="icon-instagram"></i></a>
+                        <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i
+                                class="icon-youtube"></i></a>
+                        <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i
+                                class="icon-pinterest"></i></a>
+                    </div><!-- End .soial-icons -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+        {% endblock %}
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            <form action="#" method="get" class="mobile-search">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search"
+                    placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+
+            <ul class="nav nav-pills-mobile" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab"
+                        role="tab" aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab"
+                        aria-controls="mobile-cats-tab" aria-selected="false">Categories</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel"
+                    aria-labelledby="mobile-menu-link">
+                    <nav class="mobile-nav">
+                        <ul class="mobile-menu">
+                            <li class="active">
+                                <a href="/">{{'Home'|trans}}</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Shop</a>
+                                <ul>
+                                    <li><a href="category-list.html">Shop List</a></li>
+                                    <li><a href="category-2cols.html">Shop Grid 2 Columns</a></li>
+                                    <li><a href="category.html">Shop Grid 3 Columns</a></li>
+                                    <li><a href="category-4cols.html">Shop Grid 4 Columns</a></li>
+                                    <li><a href="category-boxed.html"><span>Shop Boxed No Sidebar<span
+                                                    class="tip tip-hot">Hot</span></span></a></li>
+                                    <li><a href="category-fullwidth.html">Shop Fullwidth No Sidebar</a></li>
+                                    <li><a href="product-category-boxed.html">Product Category Boxed</a></li>
+                                    <li><a href="product-category-fullwidth.html"><span>Product Category Fullwidth<span
+                                                    class="tip tip-new">New</span></span></a></li>
+                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="#">Lookbook</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="product.html" class="sf-with-ul">Product</a>
+                                <ul>
+                                    <li><a href="product.html">Default</a></li>
+                                    <li><a href="product-centered.html">Centered</a></li>
+                                    <li><a href="product-extended.html"><span>Extended Info<span
+                                                    class="tip tip-new">New</span></span></a></li>
+                                    <li><a href="product-gallery.html">Gallery</a></li>
+                                    <li><a href="product-sticky.html">Sticky Info</a></li>
+                                    <li><a href="product-sidebar.html">Boxed With Sidebar</a></li>
+                                    <li><a href="product-fullwidth.html">Full Width</a></li>
+                                    <li><a href="product-masonry.html">Masonry Sticky Info</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Pages</a>
+                                <ul>
+                                    <li>
+                                        <a href="#">About</a>
+
+                                        <ul>
+                                            <li><a href="#">About 01</a></li>
+                                            <li><a href="#">About 02</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Contact</a>
+                                    </li>
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="faq.html">FAQs</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav><!-- End .mobile-nav -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
+                    <nav class="mobile-cats-nav">
+                        <ul class="mobile-cats-menu">
+                            <li><a class="mobile-cats-lead" href="#">Daily offers</a></li>
+                            <li><a class="mobile-cats-lead" href="#">Gift Ideas</a></li>
+                            <li><a href="#">Beds</a></li>
+                            <li><a href="#">Lighting</a></li>
+                            <li><a href="#">Sofas & Sleeper sofas</a></li>
+                            <li><a href="#">Storage</a></li>
+                            <li><a href="#">Armchairs & Chaises</a></li>
+                            <li><a href="#">Decoration </a></li>
+                            <li><a href="#">Kitchen Cabinets</a></li>
+                            <li><a href="#">Coffee & Tables</a></li>
+                            <li><a href="#">Outdoor Furniture </a></li>
+                        </ul><!-- End .mobile-cats-menu -->
+                    </nav><!-- End .mobile-cats-nav -->
+                </div><!-- .End .tab-pane -->
+            </div><!-- End .tab-content -->
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    {% block modal %}{% endblock %}
+
+    <!-- Sign in / Register Modal -->
+    <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="icon-close"></i>
+                        </span>
+                    </button>
+
+                    <div class="form-box">
+                        <div class="form-tab">
+                            <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin"
+                                        role="tab" aria-controls="signin" aria-selected="true">{{'Sign In'|trans}}</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content" id="tab-content-5">
+                                <div class="tab-pane fade show active" id="signin" role="tabpanel"
+                                    aria-labelledby="signin-tab">
+                                    <form action="{{ path('app_login') }}" method="post">
+                                        <div class="form-group">
+                                            <label for="singin-email">{{'Username or email address'|trans}} *</label>
+                                            <input type="email"
+                                                value="{{ last_username is defined ? last_username:'' }}" name="email"
+                                                id="inputEmail" placeholder="email" class="form-control"
+                                                autocomplete="email" required autofocus>
+                                        </div>
+                                        <!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="singin-password">{{'Password'|trans}} *</label>
+                                            <input type="password" name="password" id="inputPassword"
+                                                placeholder="{{'password'|trans}}" class="form-control"
+                                                autocomplete="current-password" required>
+                                            <input type="hidden" name="_csrf_token"
+                                                value="{{ csrf_token('authenticate') }}">
+                                        </div>
+                                        <!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>{{'LOG IN'|trans}}</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="signin-remember">
+                                                <label class="custom-control-label" for="signin-remember">
+                                                    {{'Remember Me'|trans}}</label>
+                                            </div>
+                                            <!-- End .custom-checkbox -->
+                                            <a href="{{ path('app_forgot_password_request') }}"
+                                                class="forgot-link">{{'Forgot Your Password'|trans}}?</a>
+                                        </div>
+                                        <div class="text-center">
+                                            <a href="{{ path('app_register') }}"
+                                                class="btn btn-outline-primary-2 mx-auto">
+                                                {{'Create an account'|trans}}
+                                            </a>
+                                        </div>
+                                        <!-- End .form-footer -->
+                                    </form>
+                                    {# <div class="form-choice">
+                                        <p class="text-center">{{'or sign in with'|trans}}</p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="{{ path('connect_google') }}" class="btn btn-login btn-g">
+                                                    <i class="icon-google"></i> {{'Login With Google'|trans}}
+                                                </a>
+                                            </div>
+                                            <!-- End .col-6 -->
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-f">
+                                                    <i class="icon-facebook-f"></i> {{'Login With Facebook'|trans}}
+                                                </a>
+                                            </div>
+                                            <!-- End .col-6 -->
+                                        </div>
+                                        <!-- End .row -->
+                                    </div> #}
+                                    <!-- End .form-choice -->
+                                </div>
+                                <!-- .End .tab-pane -->
+                                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                                    {# {% include "registration/_form.html.twig" %} #}
+                                    <form name="registration_form" method="post" action="/register"
+                                        novalidate="novalidate">
+
+                                        <div class="form-group">
+                                            <label for="registration_form_personne_firstName" class="required">{{'First
+                                                name'|trans}}
+                                                *</label><input type="text" id="registration_form_personne_firstName"
+                                                name="registration_form[personne][firstName]" required="required"
+                                                placeholder="{{'First name'|trans}}" class="form-control" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registration_form_personne_lastName" class="required">{{'Last
+                                                name'|trans}}
+                                                *</label><input type="text" id="registration_form_personne_lastName"
+                                                name="registration_form[personne][lastName]" required="required"
+                                                placeholder="Nom" class="form-control" value="Tounkara">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registration_form_email" class="required">
+                                                Email *
+                                            </label><input type="email" id="registration_form_email"
+                                                name="registration_form[email]" required="required"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registration_form_phone_number" class="required">
+                                                {{'Phone number'|trans}}
+                                                Numéro det téléphone
+                                                *
+                                            </label><input type="text" id="registration_form_phone_number"
+                                                name="registration_form[phone_number]" required="required"
+                                                placeholder="Numéro de téléphone" value="781278288"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registration_form_password" class="required">
+                                                {{'Password'}} *
+                                            </label><input type="password" id="registration_form_password"
+                                                name="registration_form[password]" required="required"
+                                                autocomplete="new-password" placeholder="Mot de passe"
+                                                class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input type="checkbox" id="registration_form_agreeTerms"
+                                                    name="registration_form[agreeTerms]" required="required"
+                                                    class="form-check-input" value="1">
+                                                <label class="form-check-label required"
+                                                    for="registration_form_agreeTerms">
+                                                    {{'I accept the user conditions'|trans}}
+                                                    {# J'acceptes les conditions d'utilisateurs #}
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>{{'SIGN UP'|trans}}</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+                                        </div>
+                                        <div id="registration_form"><input type="hidden" id="registration_form__token"
+                                                name="registration_form[_token]"
+                                                value="{{ csrf_token('registration') }}">
+                                        </div>
+                                        <!-- End .form-footer -->
+                                        <div class="form-choice">
+                                            <p class="text-center">{{'or sign in with'|trans}}</p>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-login btn-g">
+                                                        <i class="icon-google"></i> {{'Login With Google'|trans}}
+                                                    </a>
+                                                </div>
+                                                <!-- End .col-6 -->
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-login  btn-f">
+                                                        <i class="icon-facebook-f"></i> {{'Login With Facebook'|trans}}
+                                                    </a>
+                                                </div>
+                                                <!-- End .col-6 -->
+                                            </div>
+                                            <!-- End .row -->
+                                        </div>
+                                        <!-- End .form-choice -->
+                                    </form>
+                                    <div class="form-choice">
+                                        <p class="text-center">{{'or sign in with'|trans}}</p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-g">
+                                                    <i class="icon-google"></i> {{'Login With Google'|trans}}
+                                                </a>
+                                            </div>
+                                            <!-- End .col-6 -->
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login  btn-f">
+                                                    <i class="icon-facebook-f"></i> {{'Login With Facebook'|trans}}
+                                                </a>
+                                            </div>
+                                            <!-- End .col-6 -->
+                                        </div>
+                                        <!-- End .row -->
+                                    </div>
+                                    <!-- End .form-choice -->
+                                </div>
+                                <!-- .End .tab-pane -->
+                            </div>
+                            <!-- End .tab-content -->
+                        </div>
+                        <!-- End .form-tab -->
+                    </div>
+                    <!-- End .form-box -->
+                </div>
+                <!-- End .modal-body -->
+            </div>
+            <!-- End .modal-content -->
+        </div>
+        <!-- End .modal-dialog -->
+    </div>
+    <!-- End .modal -->
+
+    {# <div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="row no-gutters bg-white newsletter-popup-content">
+                    <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
+                        <div class="banner-content text-center">
+                            <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60"
+                                height="15">
+                            <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
+                            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite
+                                products.</p>
+                            <form action="#">
+                                <div class="input-group input-group-round">
+                                    <input type="email" class="form-control form-control-white"
+                                        placeholder="Your Email Address" aria-label="Email Adress" required>
+                                    <div class="input-group-append">
+                                        <button class="btn" type="submit"><span>go</span></button>
+                                    </div><!-- .End .input-group-append -->
+                                </div><!-- .End .input-group -->
+                            </form>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+                                <label class="custom-control-label" for="register-policy-2">Do not show this popup
+                                    again</label>
+                            </div><!-- End .custom-checkbox -->
+                        </div>
+                    </div>
+                    <div class="col-xl-2-5col col-lg-5 ">
+                        <img src="assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> #}
+    <!-- Plugins JS File -->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.hoverIntent.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/js/superfish.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-input-spinner.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.plugin.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+    <!-- sweetalert2 -->
+    <script type="application/javascript" src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script type="application/javascript" src="{{asset('js/admin.js') }}"></script>
+    <!-- Main JS File -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{asset('js/article.js') }}"></script>
+    <script src="{{asset('js/store.js') }}"></script>
+    <script src="{{ asset('assets/js/demos/demo-14.js') }}"></script>
+    <script src="{{asset('js/util.js') }}"></script>
+    {% if route_name == 'home' %}
+    <script>
+        $(document).ready(function () {
+            // Sticky header 
+            var catDropdown = $('.category-dropdown'),
+                catInitVal = catDropdown.data('visible');
+
+            if ($('.sticky-header').length && $(window).width() >= 992) {
+                var sticky = new Waypoint.Sticky({
+                    element: $('.sticky-header')[0],
+                    stuckClass: 'fixed',
+                    offset: -300,
+                    handler: function (direction) {
+                        // Show category dropdown
+                        if (catInitVal && direction == 'up') {
+                            catDropdown.addClass('show').find('.dropdown-menu').addClass('show');
+                            catDropdown.find('.dropdown-toggle').attr('aria-expanded', 'true');
+                            return false;
+                        }
+
+                        // Hide category dropdown on fixed header
+                        if (catDropdown.hasClass('show')) {
+                            catDropdown.removeClass('show').find('.dropdown-menu').removeClass('show');
+                            catDropdown.find('.dropdown-toggle').attr('aria-expanded', 'false');
+                        }
+                    }
+                });
+            }
+
+        })
+    </script>
+    {% else %}
+    <script>
+        $(document).ready(function () {
+            // Sticky header 
+            var catDropdown = $('.category-dropdown'),
+                catInitVal = catDropdown.data('visible');
+
+            if ($('.sticky-header').length && $(window).width() >= 992) {
+                var sticky = new Waypoint.Sticky({
+                    element: $('.sticky-header')[0],
+                    stuckClass: 'fixed',
+                    offset: -300,
+                    handler: function (direction) {
+                        // // Show category dropdown
+                        // if (catInitVal && direction == 'up') {
+                        //     catDropdown.addClass('show').find('.dropdown-menu').addClass('show');
+                        //     catDropdown.find('.dropdown-toggle').attr('aria-expanded', 'true');
+                        //     return false;
+                        // }
+
+                        // Hide category dropdown on fixed header
+                        if (catDropdown.hasClass('show')) {
+                            catDropdown.removeClass('show').find('.dropdown-menu').removeClass('show');
+                            catDropdown.find('.dropdown-toggle').attr('aria-expanded', 'false');
+                        }
+                    }
+                });
+            }
+
+        })
+    </script>
+    {% endif %}
+
+    {% block foot %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+    {{ encore_entry_script_tags('app') }}
+</body>
+
+</html>

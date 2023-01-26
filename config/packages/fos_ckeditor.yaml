@@ -1,0 +1,15 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+fos_ck_editor:
+    configs:
+        my_config:
+            language: fr
+            toolbar: "my_toolbar_1"
+               # - { name: "styles", Items: ['Bold', 'Italic'] }
+    toolbars:
+        configs:
+            my_toolbar_1: [ [ "Source", "-", "Save","-","Bold","-","Italic" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
+            my_toolbar_2: [ [ "Source" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]

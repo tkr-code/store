@@ -8,4 +8,7 @@
 
 -- Message d'envoi email
 
--- Message d'erreur
+-- Message code
+    200:
+    404: 
+    500:

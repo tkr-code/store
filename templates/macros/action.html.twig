@@ -26,6 +26,10 @@
 {% import "macros/link.html.twig" as link %}
 {{ link.pencil(path('category_edit', {'id': categorie.id}),)}}
 {% endmacro %}
+{% macro categorie2(categorie) %}
+{% import "macros/link.html.twig" as link %}
+{{ link.pencil(path('app_admin_category2_edit', {'id': categorie.id}),)}}
+{% endmacro %}
 
 {% macro brand(brand) %}
 {% import "macros/link.html.twig" as link %}

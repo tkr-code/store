@@ -3,10 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Category2;
 use App\Entity\ParentCategory;
+use App\Form\Category2Type;
 use App\Form\CategoryParentType;
 use App\Form\CategoryType;
 use App\Form\ParentCategoryType;
+use App\Repository\Category2Repository;
 use App\Repository\CategoryRepository;
 use App\Repository\ParentCategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,38 +25,38 @@ class CategoryController extends AbstractController
     /**
      * @Route("/", name="category_index", methods={"GET|POST"})
      */
-    public function index(ParentCategoryRepository $parentCategoryRepository, CategoryRepository $categoryRepository, Request $request): Response
+    public function index(Category2Repository $category2Repository,CategoryRepository $categoryRepository, Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
-       $parentInformatique = $parentCategoryRepository->findOneBy([
-            'name'=>'Informatique'
-       ]);
         $entityManager = $this->getDoctrine()->getManager();
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setParentCategory($parentInformatique);
             $entityManager->persist($category);
             $entityManager->flush();
             $this->addFlash('success','La catégorie a été créé. ');
             return $this->redirectToRoute('category_index', [], Response::HTTP_SEE_OTHER);
         }
         
-        $parentCategorie = new ParentCategory();
-        $formParent = $this->createForm(ParentCategoryType::class,$parentCategorie)
-        ->handleRequest($request);
-        if($formParent->isSubmitted() && $formParent->isValid()){
-            $entityManager->persist($parentCategorie);
-            $entityManager->flush();
-            $this->addFlash('success','le parent catégorie a été créé. ');
+        $category2 = new Category2();
+        $form2 = $this->createForm(Category2Type::class, $category2);
+        $form2->handleRequest($request);
+
+        if ($form2->isSubmitted() && $form2->isValid()) {
+            $category2->setSlug($category2->getTitle());
+            $category2Repository->add($category2, true);
+
             return $this->redirectToRoute('category_index', [], Response::HTTP_SEE_OTHER);
         }
+        
+       
         return $this->renderForm('admin/category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
-            'parents'=>$parentCategoryRepository->findAll(),
+            'categories2' => $category2Repository->findAll(),
             'form'=>$form,
-            'form_parent'=>$formParent,
+            'form2'=>$form2,
+            'form_parent'=>'',
             'parent_page'=>'Categorie'
         ]);
     }

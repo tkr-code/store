@@ -8,7 +8,8 @@
         		{% if item.reduction > 0 %}
 			<span class="product-label mt-3 label-circle label-out bg-danger">-{{ item.reduction}}%</span>
 		{% endif %}        
-        <a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug, id: item.id}) }}">
+        <a 
+		href="{{ path('articles_show', { category: item.category.slug, slug: item.slug, id: item.id}) }}">
         {% for item in item.images|slice(0,1) %}
             <img class="product-image" src="{{ asset('img/article/' ~ item.name ) }}" alt="{{ item.name }}">
         {% else %}
@@ -49,7 +50,10 @@
 
     <div class="product-body">
         <div class="product-cat">
-            <a href="{{ path('articles_category',{category: item.category.slug|lower }) }}">{{ item.category.title }}</a>
+            <a href="{{path('articles_category',{
+				category3_slug:item.category.category2.category3.slug,
+				category2_slug:item.category.category2.slug,
+				category:article.category.slug}) }}">{{ item.category.title }}</a>
         </div>
         <!-- End .product-cat -->
         <h3 class="product-title">
@@ -60,15 +64,12 @@
         <!-- End .product-title -->
         <div class="product-price">
            {% if item.reduction > 0 %}
-			{{ item.newPrice|number_format(0,'', ' ')}}
-			{{ site.current_name }}
+		   {{ site.current_name ~ item.newPrice|number_format(2,'.', ' ')}}
 			<span class="old-price ml-1">
-				{{ item.price|number_format(0,'',' ') }}
-			{{ site.current_name }}
+				{{ site.current_name ~ item.price|number_format(2,'.',' ') }}
 			</span>
 			{% else %}				
-			{{ item.newPrice|number_format(0,'',' ')}}
-			{{ site.current_name }}
+			{{ site.current_name ~ item.newPrice|number_format(2,'.',' ')}}
 		{% endif %}
         </div>
         <!-- End .product-price -->

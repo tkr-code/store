@@ -3,6 +3,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
     globals: 
+        author: Malick Tounkara
         app_name: 'Store'
         locales: '%app.locales%'
         search_form: '@App\Twig\SearchExtension'
@@ -10,19 +11,22 @@ twig:
         categories: '@App\Twig\CategoryExtention'
         parentCategorys: '@App\Twig\CategoryParentExtention'
         gg_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+        base: 'dev'
         site:
-            base: 'dev'
             version: '1.0' 
             name: 'store'
+            desc: 'Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.'
             email: 'contact@store.sn'
             path_logo: 'logo-lest.png'
+            path_logo_1: 'soaisha-boutik-3.png'
+            path_logo_icon: 'soaisha-boutik.png'
             current_name: 'F CFA'
             current: 'XOF'
             phone_number_1: '+221 77 801 06 46'
-            phone_1: '+221778010646'
+            tel_1: '221781278288'
             phone_number_2: '+221 76 201 51 61'
             phone_2: '+221762015161'
-            link: "https://lest.sn"
+            link: "https://koumshoes.com"
             mission_text: 'text à definir'
             user_empty: 'empty.png'
             orange_money: '+221 77 801 06 46'
@@ -32,7 +36,13 @@ twig:
             pays: 'Sénégal'
             whatsapp: "https://api.whatsapp.com/send?phone=221778010646&text=Salut, je vous contacte depuis votre site lest.sn"
             facebook: 'https://www.facebook.com/Les-Spécialistes-de-la-Technologie-LEST-575426226469195/'
-
+        app_env: '%env(APP_ENV)%'
+        STRIPE_PUBLIC_KEY_TEST: '%env(STRIPE_PUBLIC_KEY_TEST)%' 
+        STRIPE_PUBLIC_KEY_LIVE: '%env(STRIPE_PUBLIC_KEY_LIVE)%'
+        STRIPE_WEBHOOK_SECRET: '%env(STRIPE_WEBHOOK_SECRET)%'
+        GOOGLE_CLIENT_ID: '%env(GOOGLE_CLIENT_ID)%'
+        GOOGLE_CLIENT_SECRET: '%env(GOOGLE_CLIENT_SECRET)%'
+        GOOGLE_LOGIN_URL: '%env(GOOGLE_LOGIN_URL)%'
 when@test:
     twig:
         strict_variables: true

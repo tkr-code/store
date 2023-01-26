@@ -1,0 +1,15 @@
+{% macro href_category(category) %}
+
+href="{{path('articles_category',{
+    category3_slug:category.category2.category3.slug,
+    category2_slug:category.category2.slug,
+    category:category.slug }) }}"
+{% endmacro %}
+
+{% macro is_active(isActive) %}
+    {{ (isActive) ? '<span class="badge badge-success">Yes</span>':'<span class="badge badge-warning">Non</span>' }}
+{% endmacro %}
+
+{% macro getParentForCategoryTitle(title) %}
+    
+{% endmacro %}

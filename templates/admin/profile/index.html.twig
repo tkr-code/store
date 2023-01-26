@@ -5,10 +5,10 @@
 {% import "macros/role.html.twig" as roles %}
 {% extends
 "admin/base.html.twig" %}
-{% block title %}Profile utilisateur
+{% block title %}Profil utilisateur
 {% endblock %}
 {% block breadcrumb %}
-{{ utils.breadcrumb('Profile',[])}}
+{{ utils.breadcrumb('Profil',[])}}
 {% endblock %}
 {% block head %}
 
@@ -49,11 +49,10 @@
 			<div class="card-body box-profile">
 				<div class="text-center">
 					<img class="profile-user-img img-fluid img-circle"
-						src="{{ asset('img/user/' ~ app.user.personne.avatar|default('empty.png') ) }}"
-						alt="{{ app.user.personne.firstName ~ ' ' ~ app.user.personne.lastName }}">
+						src="{{ asset('img/user/' ~ app.user.avatar|default('empty.png') ) }}"
+						alt="{{ app.user.fullName}}">
 				</div>
-				<h3 class="profile-username text-center">{{app.user.personne.lastName | title}}
-					{{app.user.personne.firstname | title }}</h3>
+				<h3 class="profile-username text-center">{{app.user.fullName }}</h3>
 				<button type="button" id="btn-editor" class="btn btn-success mb-3 btn-block">
 					<b>Modifier
 						<i class="fas fa-pencil-alt"></i>

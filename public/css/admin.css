@@ -1,7 +1,15 @@
 .a {
   color: #222;
 }
-
+.article-action{
+  font-size:13px;
+}
+.article-table-date{
+  font-size: 13px;
+}
+.article-action{
+  font-size:14px;
+}
 #image {
   display  : block;
   max-width: 100%;

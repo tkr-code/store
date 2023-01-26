@@ -21,11 +21,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("boutique/{category}/{slug}/{id}", name="articles_show", requirements={"slug": "[a-z0-9\-]*"} )
+     * @Route("article/{category}/{slug}/{id}", name="articles_show", requirements={"slug": "[a-z0-9\-]*"} )
      */
     public function show( PaginatorInterface $paginatorInterface, CommentRepository $commentRepository, ArticleBuyRepository $articleBuyRepository, Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
     {
@@ -102,26 +103,58 @@ class ArticleController extends AbstractController
     }
     /**
      * @Route("/boutique", name="articles")
-     * "/boutique/{parent}", name="articles_parent"
-     * @Route("/boutique/{category}", name="articles_category")
+     * @Route("/boutique/{category3}", name="articles_category3")
+     * //@Route("/boutique/{category3_slug}/{category2}", name="articles_category2")
+     * @Route("/boutique/{category3_slug}/{category2_slug}/{category}", name="articles_category")
      */
-    public function index(string $parent = null, string $category = null, 
-        ParentCategoryRepository $parentCategoryRepository, Request $request, PaginatorInterface $paginator, 
-        ArticleRepository $articleRepository, CategoryRepository $categoryRepository, BrandRepository $brandRepository): Response
+    public function index(
+        string $parent = null,
+        string $category = null,
+        string $category3 = null,
+        string $category2 = null,
+        SessionInterface $sessionInterface,
+        ParentCategoryRepository $parentCategoryRepository,
+        Request $request,
+        PaginatorInterface $paginator,
+        ArticleRepository $articleRepository,
+        CategoryRepository $categoryRepository,
+        BrandRepository $brandRepository): Response
     {
         $category = str_replace('-',' ',$category);
         $search = new ArticleSearch();
-        $search->setCategory($category);
+        $route_name = $request->attributes->get('_route');
+        if ($route_name == 'articles_category') {
+            $search->setCategory($category);
+        } elseif ($route_name == 'articles_category3') {
+            $search->setCategory3($category3);
+        } elseif ($route_name == 'articles_category2') {
+            $search->setCategory2($category2);
+        }
+        $sort_valide = [
+            'created_at', 'ASC', 'DESC', 'price'
+        ];
+        $sort_by = ($sessionInterface->get('sort_by'))? $sessionInterface->get('sort_by'): [];
+        if (!is_array($sort_by)) {
+            $sort_by = explode(':', $sort_by);
+            if (!in_array($sort_by[0], $sort_valide)) {
+                $sort_by = [];
+            }
+        }else{
+            $sort_by = [];
+        }
 
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
         $pagination = $paginator->paginate(
             $articleRepository->search(
                 $search->getMots(),
+                $search->getCategory3(),
+                $search->getCategory2(),
                 $search->getCategory(),
                 $search->getMinPrice(),
                 $search->getMaxPrice(),
                 $search->getBrand(),
-                $search->getEtat()
+                $search->getEtat(),
+                $sort_by
             ),
             $request->query->getInt('page',1),
             12

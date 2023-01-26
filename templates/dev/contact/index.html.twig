@@ -1,4 +1,4 @@
-{% extends site.base ~ "/base.html.twig" %}
+{% extends base ~"/base.html.twig" %}
 
 {% block javascripts %}
 {% endblock %}
@@ -11,6 +11,7 @@ function onSubmit(token) {
 {% endblock %}
 {% block main %}
 <main class="main">
+    {% include base ~"/_icon-boxes.html.twig" %}
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
         <div class="container">
             <ol class="breadcrumb">
@@ -23,12 +24,12 @@ function onSubmit(token) {
     <div class="page-content">
         {# <div id="map" class="mb-5"></div> #}
         <div class="text-center mb-5">
-            <img class="d-inline-block my-5" width="100px" src="{{ asset('img/icons/' ~ site.path_logo) }}" />
+            <img class="d-inline-block my-5" width="100px" src="{{ asset('img/lesekoya.png') }}" />
             <h2 class="title mb-1 text-center">Entrer en contact </h2>
         </div>
         <div class="container">
             {% include "includes/_alerte.html.twig" %}
-            {% include "lest/_contact.html.twig" %}
+            {% include base ~ "/_contact.html.twig" %}
             <hr class="mt-3 mb-5 mt-md-1">
             <div class="touch-container row justify-content-center">
                 <div class="col-md-9 col-lg-7">

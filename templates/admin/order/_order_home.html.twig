@@ -2,15 +2,15 @@
 	<thead>
 		<tr>
 			<th>{{'number'|trans}}</th>
-			<th>{{'Customer'|trans}}</th>
+			{# <th>{{'Customer'|trans}}</th> #}
 			<th>{{'Status'|trans}}</th>
-			<th>Crée le</th>
+			<th>Date</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for item in lastOrder %}
 		<tr {{ (item.user.status=='Delete' )? 'class="text-danger"' : '' }}>
-			<td>{{ item.number }}
+			<td>#{{ item.id }}
 				<a class="text-dark js-order-view" title="Voir" href="{{ path('main_order_show',{id:item.id}) }}">
 					<i class="fa fa-eye float-right" aria-hidden="true"></i>
 				</a>
@@ -21,8 +21,8 @@
 				</a>
 				{% endif %}
 				{% endif %}
+			{{ item.user.fullName }}
 			</td>
-			<td>{{ item.user.email |explode_email }}</td>
 			<td>
 				{% import "/macros/etats.html.twig" as etats %}
 				{{ etats.order(item.state) }}

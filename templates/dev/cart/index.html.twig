@@ -1,4 +1,4 @@
-{% extends site.base ~ "/base.html.twig" %}
+{% extends base ~"/base.html.twig" %}
 
 {% if app.request.session.get('shipping') %}
 {% set delivery = app.request.session.get('shipping') %}
@@ -8,12 +8,9 @@
 {% endblock %}
 
 {% block main %}
-<style>
-    .product-col {
-  width: 280px;
-}
-</style>
+
 <main class="main">
+    {% include base ~"/_icon-boxes.html.twig" %}
     <!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
@@ -35,9 +32,10 @@
         <div class="cart">
             <div class="container">
                 {% include "includes/_alerte.html.twig" %}
-                {% if app.request.session.get('panier') %}
+                {# {% if app.request.session.get('panier') %} #}
                 <div class="row">
                     <div class="col-lg-9">
+                        {% if app.request.session.get('panier') %}
                         <table class="table table-cart table-mobile">
                             <thead>
                                 <tr>
@@ -68,15 +66,17 @@
 
                                             <h3 class="product-title">
                                                 <a href="#">{{ item.article.title }}</a> <br>
+                                                
                                                 {% if item.article.reduction > 0 %}
-                                        <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }}
-                                        </span>
-                                        <span class="old-price">{{ item.article.formatterPrice }}</span>
-                                        {% else %}
-                                        <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }}
-                                        </span>
-                                        {% endif %}
-                                        {{ site.current_name }}
+                                                <span class="new-price">{{  item.article.newPrice| number_format(2,'.','
+                                                    ') ~ site.current_name }}
+                                                </span>
+                                                {# <span class="old-price">{{ item.article.formatterPrice }}</span> #}
+                                                {% else %}
+                                                <span class="new-price">{{ item.article.newPrice| number_format(2,'.','
+                                                    ') ~ site.current_name }}
+                                                </span>
+                                                {% endif %}
                                             </h3>
                                             <!-- End .product-title -->
                                         </div>
@@ -120,8 +120,8 @@
                                         </form>
                                     </td>
 
-                                    <td class="total-col">{{ (item.article.newPrice * item.quantite) |
-                                        number_format(0,'.',' ') ~ ' ' ~ site.current_name }}
+                                    <td class="total-col">{{  (item.article.newPrice * item.quantite) |
+                                        number_format(2,'.',' ') ~ site.current_name}}
                                     </td>
                                     <td class="remove-col">
                                         <a href="{{ path('cart_delete',{id:item.article.id}) }}" class="btn-remove">
@@ -135,31 +135,19 @@
 
                             </tbody>
                         </table>
-                        <!-- End .table table-wishlist -->
-
-                        {# <div class="cart-bottom">
-                            <div class="cart-discount">
-                                <form action="#">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" required="" placeholder="coupon code">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary-2" type="submit">
-                                                <i class="icon-long-arrow-right"></i>
-                                            </button>
-                                        </div>
-                                        <!-- .End .input-group-append -->
-                                    </div>
-                                    <!-- End .input-group -->
-                                </form>
+                        {% else %}
+                        <div class="">
+                            <div class="card-body text-center">
+                                <span class="btn bg-primary btn-primary p-5 rounded-circle">
+                                    <i class="icon-shopping-cart" style="font-size:7rem"></i>
+                                </span>
+                                <h3>{{'Empty cart'|trans }}</h3>
+                                <p>Ajouter au moins un article au panier</p>
+                                <a href="{{ path('articles') }}" class="btn btn-primary mt-2 ">Tous nos
+                                    produits</a>
                             </div>
-                            <!-- End .cart-discount -->
-
-                             <a href="#" class="btn btn-outline-dark-2">
-                                <span>UPDATE CART</span>
-                                <i class="icon-refresh"></i>
-                            </a> 
-                        </div> #}
-                        <!-- End .cart-bottom -->
+                        </div>
+                        {% endif %}
                     </div>
                     <!-- End .col-lg-9 -->
                     <aside class="col-lg-3">
@@ -199,8 +187,7 @@
                                                     <p class="text-center">
                                                         <span class="text-danger font-weight-bold">
                                                             {{
-                                                            delivery.shippingAmount.amount|number_format(2,'.','
-                                                            ') }}
+                                                            delivery.shippingAmount.amount|number_format(2,'.',' ') }}
                                                             {{ site.current_name
                                                             }}
                                                         </span>
@@ -254,8 +241,7 @@
                                         <tr class="summary-subtotal">
                                             <td>{{'Subtotal'|trans}}:</td>
                                             <td style="min-width:max-content">
-                                                {{ total|number_format(0,'.',' ') }}
-                                                {{ site.current_name }}
+                                                {{ total|number_format(2,'.',' ') ~ site.current_name }}
                                             </td>
                                         </tr>
 
@@ -265,12 +251,11 @@
                                             <td>
                                                 {% if app.request.session.get('shipping') %}
                                                 <span class="text-danger" class="total">
-                                                    {{ (total + delivery.shippingAmount.amount)|number_format(0,'.',' ')
-                                                    }} {{ site.current_name }}
+                                                     {{ (total + delivery.shippingAmount.amount)|number_format(2,'.',' ') ~ site.current_name  }}
                                                 </span>
                                                 {% else %}
                                                 <span class="text-danger total">
-                                                    {{ total|number_format(0,'.',' ' ) ~ ' ' ~ site.current_name }}
+                                                    {{ total|number_format(2,'.',' ' ) ~ site.current_name  }}
                                                 </span>
                                                 {% endif %}
                                             </td>
@@ -279,12 +264,18 @@
                                     </tbody>
                                 </table>
                                 <!-- End .table table-summary -->
-
+                                {% if app.request.session.get('panier') %}
                                 <button type="submit" id="btn-submit-order"
                                     class="btn btn-outline-primary-2 btn-order btn-block">COMMANDER</button>
+                                {% endif %}
+
+                                {# <a href="{{ path('client_payment_stripe') }}"
+                                    class="btn btn-outline-primary-2 btn-order btn-block">PAYER</a> #}
+
                             </div>
                             <!-- End .summary -->
                         </form>
+
                         <a href="{{ path('articles') }}" class="btn btn-outline-dark-2 btn-block mb-3">
                             <span>CONTINUEZ VOS COURSES</span>
                             <i class="icon-refresh"></i>
@@ -293,22 +284,7 @@
                     <!-- End .col-lg-3 -->
                 </div>
                 <!-- End .row -->
-                {% else %}
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <span class="btn bg-primary btn-primary p-5 rounded-circle">
-                                    <i class="icon-shopping-cart" style="font-size:7rem"></i>
-                                </span>
-                                <h3>{{'Empty cart'|trans }}</h3>
-                                <p>Ajouter au moins un article au panier</p>
-                                <a href="{{ path('articles') }}" class="btn btn-primary mt-2 w-100">Tous nos produits</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
+                {# {% endif %} #}
             </div>
             <!-- End .container -->
         </div>
@@ -317,105 +293,112 @@
 </main>{% endblock %}
 
 {% block javascripts %}
+{% if not is_granted('ROLE_CLIENT') %}
 <script>
     $(document).ready(function () {
+        $(document).on('click', '#btn-submit-order', function (e) {
+            e.preventDefault()
+            Swal.fire({
+                title: 'Oups !',
+                text: 'Veillez vous connecter ou creer un compte.',
+                icon: 'info',
+                confirmButtonText: 'Se connecter ou creer un compte',
+            }).then((result) => {
+                $('#signin-modal').modal('show')
+            })
+        })
+    })
+</script>
+{% else %}
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '#btn-submit-order', function (e) {
+            e.preventDefault()
+            if ($('#streets').val() == '0') {
+                Swal.fire(
+                    'Oups !',
+                    'Choississez un lieu de livraison',
+                    'warning'
+                )
+                return
+            }
+            Swal.fire({
+                title: 'Etes vous sur ?',
+                text: 'Vous etes sur le point de confirmer une commande.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Non',
+                confirmButtonText: 'CONFIRMER',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#form_order_client_new').submit()
+                }
+            })
+
+
+        })
+    })
+</script>
+{% endif %}
+
+<script>
+    $(document).ready(function () {
+
         function total(val = 0) {
-            let total = {{ total }} + val;
-        return total
-    }
-    {% if not is_granted('ROLE_CLIENT') %}
-    //Envoyer la comande
-    $(document).on('click', '#btn-submit-order', function (e) {
-        e.preventDefault()
-        Swal.fire({
-            title: 'Oups !',
-            text: 'Veillez vous connecter ou creer un compte.',
-            icon: 'info',
-            confirmButtonText: 'Se connecter ou creer un compte',
-        }).then((result) => {
-            $('#signin-modal').modal('show')
-        })
-    })
-
-    {% else %}
-
-    $(document).on('click', '#btn-submit-order', function (e) {
-        e.preventDefault()
-        if ($('#streets').val() == '0') {
-            Swal.fire(
-                'Oups !',
-                'Choississez un lieu de livraison',
-                'warning'
-            )
-            return
+            let total = "{{ total }}" + val;
+            return total
         }
-        Swal.fire({
-            title: 'Etes vous sur ?',
-            text: 'Vous etes sur le point de confirmer une commande.',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Non',
-            confirmButtonText: 'CONFIRMER',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $('#form_order_client_new').submit()
-            }
+
+        $(document).on('change', '#select-city', function () {
+            //on recupere l'id de la ville
+            let value = $(this).val()
+            // on envoie avec post
+            $.ajax({
+                url: "{{ path('client_shipping') }}",
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    id_city: value,
+                },
+                beforeSend: function () {
+                    $('#loader-select-street').show()
+                    $('#js-select-street').hide()
+                    $('.js-amount').hide()
+                },
+                success: function (data) {
+                    $('#loader-select-street').hide()
+                    $('.select-street').remove()
+                    $('#js-select-street').html(data.response);
+                    $('#js-select-street').show()
+                }
+            }) // ./ajax
         })
 
+        $(document).on('change', '#streets', function () {
+            let id = $(this).val()
+            $.ajax({
+                url: "{{ path('client_shipping_amount') }}",
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    id_street: id,
+                    total: "{{ total }}"
+                },
+                beforeSend: function () {
+                    $('#loader-street-amount').show()
+                    $('.js-amount').hide()
 
+                },
+                success: function (data) {
+                    $('.js-amount').html(data.response).show()
+                    $('#loader-street-amount').hide()
+                    $('.total').text(data.total)
+                    $('.js-show-amount').text(data.amount2)
+                }
+            })
+        })
     })
-    {% endif %}
-
-    $(document).on('change', '#select-city', function () {
-        //on recupere l'id de la ville
-        let value = $(this).val()
-        // on envoie avec post
-        $.ajax({
-            url: "{{ path('client_shipping') }}",
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                id_city: value,
-            },
-            beforeSend: function () {
-                $('#loader-select-street').show()
-                $('#js-select-street').hide()
-                $('.js-amount').hide()
-            },
-            success: function (data) {
-                $('#loader-select-street').hide()
-                $('.select-street').remove()
-                $('#js-select-street').html(data.response);
-                $('#js-select-street').show()
-            }
-        }) // ./ajax
-    })
-
-    $(document).on('change', '#streets', function () {
-        let id = $(this).val()
-        $.ajax({
-            url: "{{ path('client_shipping_amount') }}",
-            method: "POST",
-            dataType: 'json',
-            data: {
-                id_street: id,
-                total: {{ total }}
-        },
-        beforeSend: function () {
-            $('#loader-street-amount').show()
-            $('.js-amount').hide()
-
-        },
-        success: function (data) {
-            $('.js-amount').html(data.response).show()
-            $('#loader-street-amount').hide()
-            $('.total').text(data.total)
-            $('.js-show-amount').text(data.amount2)
-        }
-      })
-    })
-  })
 </script>
 {% endblock %}

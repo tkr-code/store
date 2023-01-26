@@ -1,18 +1,15 @@
 {% if is_granted('ROLE_CLIENT') %}
-	<a href="{{ path('favoris_index') }}" title="Wishlist">
-		<div class="icon">
-			<i class="icon-heart-o"></i>
-			<span class="wishlist-count badge">{{ app.user.favoris|length}}
-			</span>
-		</div>
-		<p>{{'Wishlist'|trans}}</p>
-	</a>
+<a href="{{ path('favoris_index') }}" class="wishlist-link">
+	<i class="icon-heart-o"></i>
+	<span class="wishlist-count">
+		{{ app.user.favoris|length}}
+	</span>
+	<span class="wishlist-txt">{{'Wishlist'|trans}}</span>
+</a>
 {% else %}
-	<a href="#" class="js-favoris-login" title="Wishlist">
-		<div class="icon">
-			<i class="icon-heart-o"></i>
-			<span class="wishlist-count badge">0</span>
-		</div>
-		<p>{{'Wishlist'|trans}}</p>
-	</a>
+<a href="#" class="wishlist-link js-favoris-login">
+	<i class="icon-heart-o"></i>
+	<span class="wishlist-count">0</span>
+	<span class="wishlist-txt">{{'My Wishlist'|trans}}</span>
+</a>
 {% endif %}

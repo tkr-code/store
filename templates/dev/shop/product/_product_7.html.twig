@@ -1,0 +1,58 @@
+{% import "macros/article.html.twig" as articleMacro %}
+
+<div class="product product-7 text-center">
+    <figure class="product-media">
+        {{ articleMacro.label(article.label) }}
+        {% if article.reduction > 0 %}
+        <span class="product-label mt-3 label-out bg-danger">-{{ article.reduction}}%</span>
+        {% endif %}
+
+        <a {{ articleMacro.href_show(article) }}>
+            {% for article in article.images|slice(0,2) %}
+            <img class="{{ loop.last==0 ? 'product-image' :'product-image-hover' }}"
+                src="{{ asset('img/article/' ~ article.name ) | imagine_filter('product7') }}" alt="{{ article.name }}">
+            {% else %}
+            <img src="{{ asset('img/vide.png') |imagine_filter('product7') }}" alt="Product image" class="product-image">
+            {% endfor %}
+        </a>
+
+        <div class="product-action-vertical">
+            {{ articleMacro.wishlist(article)}}
+           
+        </div><!-- End .product-action-vertical -->
+
+        <div class="product-action">
+            {{ articleMacro.card_add(article)}}
+        </div><!-- End .product-action -->
+    </figure><!-- End .product-media -->
+
+    <div class="product-body">
+        <h3 class="product-title">
+            <a {{ articleMacro.href_show(article) }}>
+                {{ article.title }}
+            </a>
+        </h3>
+        <!-- End .product-title -->
+        <div class="product-price">
+            {{ articleMacro.price(article) }}
+        </div>
+
+        <div class="ratings-container">
+            <div class="ratings">
+                <div class="ratings-val" {{ ratingStyle(article) }}></div>
+                <!-- End .ratings-val -->
+            </div><!-- End .ratings -->
+            <span class="ratings-text">
+                ({{ article.comments|length}} <i class="fas fa-comment"></i>)
+            </span>
+        </div><!-- End .rating-container -->
+
+        <div class="product-nav product-nav-thumbs">
+            {% for image in article.images|slice(0,3) %}
+            <a type="button" href="#" {{ loop.index==0 ? 'class="active"' :'' }}>
+                <img src="{{ asset('img/article/' ~ image.name ) | imagine_filter('article2') }}" alt="">
+            </a>
+            {% endfor %}
+        </div><!-- End .product-nav -->
+    </div><!-- End .product-body -->
+</div><!-- End .product -->

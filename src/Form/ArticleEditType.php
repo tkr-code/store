@@ -24,6 +24,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ArticleEditType extends AbstractType
 {
@@ -41,7 +42,13 @@ class ArticleEditType extends AbstractType
                 'attr'=>[
                     'placeholder'=>'Enter title'
                 ],
-                'help'=>'the product is unique and greater than 3 characters'
+                'help'=>'The product is unique and greater than 3 characters'
+            ])
+            ->add('detail',TextType::class,[
+                'label'=>'Détail (*)',
+                'attr'=>[
+                    'placeholder'=>'Entrer les détails'
+                ],
             ])
             ->add('ref',TextType::class,[
                 'attr'=>[
@@ -84,11 +91,11 @@ class ArticleEditType extends AbstractType
                 ],
                 'help'=>'The quantity must be greater than zero'
             ])
-            ->add('description',TextareaType::class,[
-                'label'=>'Details (*)',
+            ->add('description',CKEditorType::class,[
+                'label'=>'Description (*)',
                 'attr'=>[
                     'placeholder'=>'The descripsion greater 10 characters',
-                ]
+                ],
             ])
 
             ->add('label',ChoiceType::class,[

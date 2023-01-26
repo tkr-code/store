@@ -23,7 +23,7 @@ class UserController extends AbstractController
 {
     private $parent_page = 'User';
     /**
-     * @Route("admin/user/", name="user_index", methods={"GET"})
+     * @Route("my-account/user/", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {

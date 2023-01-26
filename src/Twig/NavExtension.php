@@ -4,13 +4,14 @@ namespace App\Twig;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class NavExtension extends AbstractExtension
 {
     private $translator;
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(Environment $twig, TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
@@ -45,7 +46,7 @@ class NavExtension extends AbstractExtension
                         'path' => 'profile_index',
                     ],
                     [
-                        'name' => 'Lest',
+                        'name' => $_ENV['APP_NAME'],
                         'icon' => 'fa fa-home',
                         'links' =>
                         [

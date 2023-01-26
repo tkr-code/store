@@ -196,7 +196,7 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($article);
             $entityManager->flush();
-            $this->addFlash('success', "L'article a été modifier avec succès");
+            $this->addFlash('success', "Modification réussie");
             return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
         }
 

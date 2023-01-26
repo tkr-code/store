@@ -16,6 +16,10 @@ class ArticleSearch{
      * @var mixed
      */
     private $category;
+
+    private $category2;
+    
+    private $category3;
     /**
      * @Assert\Range(
      * min="100"
@@ -150,6 +154,45 @@ class ArticleSearch{
     public function setEtat($etat)
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+    /**
+     * Get the value of category3
+     */ 
+    public function getCategory3()
+    {
+        return $this->category3;
+    }
+
+    /**
+     * Set the value of category3
+     *
+     * @return  self
+     */ 
+    public function setCategory3($category3)
+    {
+        $this->category3 = $category3;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of category2
+     */ 
+    public function getCategory2()
+    {
+        return $this->category2;
+    }
+
+    /**
+     * Set the value of category2
+     *
+     * @return  self
+     */ 
+    public function setCategory2($category2)
+    {
+        $this->category2 = $category2;
 
         return $this;
     }

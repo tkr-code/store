@@ -43,6 +43,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('cartTotal', [$this, 'cartTotal']),
             new TwigFunction('cartAll', [$this, 'cartAll']),
             new TwigFunction('rating', [$this, 'rating']),
+            new TwigFunction('ratingStyle', [$this, 'ratingStyle']),
             new TwigFunction('dateFilter', [$this, 'doSomething']),
         ];
     }
@@ -82,6 +83,12 @@ class AppExtension extends AbstractExtension
 
     public function rating(Article $article){
        return $this->commentRepository->rating($article);
+    }
+
+    public function ratingStyle(Article $article){
+        $rating = $this->commentRepository->rating($article);
+        $style = "style=width:$rating%";
+       return $style;
     }
 
     public function doSomething($date)

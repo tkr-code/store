@@ -36,7 +36,7 @@ class OrderFixtures extends Fixture implements DependentFixtureInterface
         $order->setUser($this->getReference('client_client@store.com'));
         
         // //initialise l'article
-        $article = $this->getReference('_article_Hp_elitebook_Folio_G1');
+        $article = $this->getReference('_article_Wax_Africain');
         // //initialise la ligne de la commande
         $orderItem = new OrderItem();
         $orderItem->setReduction($article->getReduction());
