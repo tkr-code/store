@@ -45,52 +45,53 @@ class ArticleEditType extends AbstractType
                 'help'=>'The product is unique and greater than 3 characters'
             ])
             ->add('detail',TextType::class,[
-                'label'=>'Détail (*)',
+                'label'=>'Description courte (*)',
                 'attr'=>[
                     'placeholder'=>'Entrer les détails'
                 ],
             ])
             ->add('ref',TextType::class,[
+                'label'=>'Référence',
                 'attr'=>[
                     'disabled'=>$disabled
                 ]
             ])
-            ->add('buyingPrice',TextType::class,[
-                'label'=>"Prix d'achat (*)",
-                'attr'=>[
-                    'placeholder'=>'The price must be greater than zero'
-                ],
-                'help'=>'The price must be greater than zero'
-            ])
-            ->add('price',IntegerType::class,[
-                'label'=>'Prix de vente (*)',
-                'attr'=>[
-                    'placeholder'=>'The price must be greater than zero'
-                ],
-                'help'=>'The price must be greater than zero'
-            ])
-            ->add('reduction',ChoiceType::class,[
-                'label'=>'Reduction',
-                'choices'=>Article::reductions(),
-                'required'=>false,
-                'attr'=>[
-                    'class'=>'select2'
-                ]
-            ])
-            ->add('qty_reel',IntegerType::class,[
-                'label'=>'Quantité en stock (*)',
-                'attr'=>[
-                    'placeholder'=>'The quantity must be greater than zero'
-                ],
-                'help'=>'The quantity must be greater than zero'
-            ])
-            ->add('quantity',IntegerType::class,[
-                'label'=>'Quantité (*)',
-                'attr'=>[
-                    'placeholder'=>'The quantity must be greater than zero'
-                ],
-                'help'=>'The quantity must be greater than zero'
-            ])
+            // ->add('buyingPrice',TextType::class,[
+            //     'label'=>"Prix d'achat (*)",
+            //     'attr'=>[
+            //         'placeholder'=>'The price must be greater than zero'
+            //     ],
+            //     'help'=>'The price must be greater than zero'
+            // ])
+            // ->add('price',IntegerType::class,[
+            //     'label'=>'Prix de vente (*)',
+            //     'attr'=>[
+            //         'placeholder'=>'The price must be greater than zero'
+            //     ],
+            //     'help'=>'The price must be greater than zero'
+            // ])
+            // ->add('reduction',ChoiceType::class,[
+            //     'label'=>'Reduction',
+            //     'choices'=>Article::reductions(),
+            //     'required'=>false,
+            //     'attr'=>[
+            //         'class'=>'select2'
+            //     ]
+            // ])
+            // ->add('qty_reel',IntegerType::class,[
+            //     'label'=>'Quantité en stock (*)',
+            //     'attr'=>[
+            //         'placeholder'=>'The quantity must be greater than zero'
+            //     ],
+            //     'help'=>'The quantity must be greater than zero'
+            // ])
+            // ->add('quantity',IntegerType::class,[
+            //     'label'=>'Quantité (*)',
+            //     'attr'=>[
+            //         'placeholder'=>'The quantity must be greater than zero'
+            //     ],
+            //     'help'=>'The quantity must be greater than zero'
+            // ])
             ->add('description',CKEditorType::class,[
                 'label'=>'Description (*)',
                 'attr'=>[
@@ -118,38 +119,38 @@ class ArticleEditType extends AbstractType
                 'required'=>false,
 
             ])
-            ->add('status',ChoiceType::class,[
-                'label'=>'Etat',
-                'placeholder'=>"Selectionner l'état",
-                'choices'=>Article::STATUS,
-                'attr'=>[
-                    'class'=>'select2'
-                ],
-            ])
-            ->add('category',EntityType::class,[
-                'label'=>'Catégorie (*)',
-                'class'=>Category::class,
-                'choice_label'=>'title',
-                'placeholder'=>'Selectionner la catégorie'
-                ])
-            ->add('brand',EntityType::class,[
-                'label'=>'Marque',
-                'class'=>Brand::class,
-                'choice_label'=>'name',
-                'required'=>false,
-                'placeholder'=>'Selectionner la marque'
-                ])
+            // ->add('status',ChoiceType::class,[
+            //     'label'=>'Etat',
+            //     'placeholder'=>"Selectionner l'état",
+            //     'choices'=>Article::STATUS,
+            //     'attr'=>[
+            //         'class'=>'select2'
+            //     ],
+            // ])
+            // ->add('category',EntityType::class,[
+            //     'label'=>'Catégorie (*)',
+            //     'class'=>Category::class,
+            //     'choice_label'=>'title',
+            //     'placeholder'=>'Selectionner la catégorie'
+            //     ])
+            // ->add('brand',EntityType::class,[
+            //     'label'=>'Marque',
+            //     'class'=>Brand::class,
+            //     'choice_label'=>'name',
+            //     'required'=>false,
+            //     'placeholder'=>'Selectionner la marque'
+            //     ])
             ->add('images',FileType::class,[
                 'label'=>'Ajouter une ou plusieurs images (*)',
                 'multiple'=>true,
                 'mapped'=>false,
                 'required'=>false,
                 'constraints'=>[],
-                ])
-            ->add('enabled',CheckboxType::class,[
-                'required'=>false,
-                'label'=>'Activer',
             ]);
+            // ->add('enabled',CheckboxType::class,[
+            //     'required'=>false,
+            //     'label'=>'Activer',
+            // ]);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

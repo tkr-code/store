@@ -16,6 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\Table(name="article", indexes={@ORM\Index(columns={"title","description"}, flags={"fulltext"})})
  * @ApiResource(
+ *  paginationItemsPerPage=6,
  *  normalizationContext={"groups"={"list:article"}},
  *  collectionOperations={"get"},
  *  itemOperations={"get"}
@@ -65,115 +66,129 @@ class Article
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="float")
+     * @Groups({"list:article"})
      */
     private $price;
-
+    
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="text")
+     * @Groups({"list:article"})
      */
     private $description;
-
+    
     /**
      * @ORM\Column(type="datetime" ,options={"default"="CURRENT_TIMESTAMP"})
+     * @Groups({"list:article"})
      */
     private $created_at;
-
+    
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"list:article"})
      */
     private $updated_at;
-
+    
     /**
      * 
      * @ORM\Column(type="boolean")
+     * @Groups({"list:article"})
      */
     private $enabled;
-
+    
     /**
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=true)
      */
     private $category;
-
+    
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="produit", orphanRemoval=true, cascade={"persist"})
      */
     private $images;
-
+    
     /**
      * @ORM\OneToMany(targetEntity=ArticleOption::class, mappedBy="article", orphanRemoval=true)
      */
     private $options;
-
+    
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list:article"})
      */
     private $quantity;
-
+    
     /**
      * @ORM\Column(type="float")
      * @Assert\NotNull
+     * @Groups({"list:article"})
      */
     private $buyingPrice;
-
+    
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
      */
     private $comments;
-
+    
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list:article"})
      */
     private $etat;
-
+    
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="favoris")
      */
     private $favori;
-
+    
     /**
      * @ORM\OneToMany(targetEntity=ArticleBuy::class, mappedBy="article", orphanRemoval=true)
      */
     private $articleBuys;
-
+    
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list:article"})
      */
     private $qty_reel;
-
-
+    
+    
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list:article"})
      */
     private $label;
-
+    
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list:article"})
      */
     private $reduction;
-
+    
     /**
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="articles")
      */
     private $brand;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list:article"})
      */
     private $status;
-
+    
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list:article"})
      */
     private $ref;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list:article"})
      */
     private $detail;
-
+    
     public function __construct()
     {
         $this->images = new ArrayCollection();

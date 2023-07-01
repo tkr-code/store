@@ -97,6 +97,10 @@ class NavExtension extends AbstractExtension
                                 'path' => 'article_index',
                             ],
                             [
+                                'name' => 'Gallerie',
+                                'path' => 'article_gallery',
+                            ],
+                            [
                                 'name' => 'New Produit',
                                 'path' => 'article_new',
                             ],

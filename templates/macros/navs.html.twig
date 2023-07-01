@@ -1,7 +1,7 @@
 {% macro li(item) %}
 <li class="nav-item" {{ item.id is defined ? 'id=' ~ item.id ~ '':''  }} >
     <a href="{{ path(item.path) }}" class="nav-link {{ app.request.attributes.get('_route') == item.path ? 'active': '' }} ">
-        <i class="{{ item.icon|default('far fa-circle') }} nav-icon"></i>
+        <i class="{{ item.icon|default('far fa-circle nav-icon') }} "></i>
         <p>{{ item.name|default('name') }}</p>
     </a>
 </li>
@@ -14,7 +14,7 @@
              {% if item.links is not defined %}
                 {{ li.li(item)}}
         {% else %}
-            {{ section.section(item.name,{pages:item.links,icon:item.icon|default('far fa-circle'),active:parent_page})}}
+            {{ section.section(item.name,{pages:item.links,icon:item.icon|default('fas fa-circle nav-icon'),active:parent_page})}}
         {% endif %}
         {% endfor %}
 {% endmacro %}
@@ -26,7 +26,7 @@
 {% endif %}
 <li class="nav-item {{ option.active|default('') == section ? 'menu-open':''  }} ">
     <a href="{{ option.link|default('#') }}" class="nav-link {{ option.active|default('') == section ? 'active':'' }}">
-        <i class="nav-icon {{ option.icon|default('far fa-circle') }}"></i>
+        <i class="nav-icon {{ option.icon|default('fas fa-circle nav-icon') }}"></i>
         <p>
         {{ section }}
         <i class="fas fa-angle-left right"></i>

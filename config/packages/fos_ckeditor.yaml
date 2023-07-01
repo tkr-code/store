@@ -11,5 +11,5 @@ fos_ck_editor:
                # - { name: "styles", Items: ['Bold', 'Italic'] }
     toolbars:
         configs:
-            my_toolbar_1: [ [ "Source", "-", "Save","-","Bold","-","Italic" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]
+            my_toolbar_1: [ [ "Source", "-", "Save","-","Bold","-","Italic","-", "Anchor", "-", "Maximize" ] ]
             my_toolbar_2: [ [ "Source" ], "/", [ "Anchor" ], "/", [ "Maximize" ] ]

@@ -7,22 +7,23 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
-
-// start the Stimulus application
+import { registerReactControllerComponents } from '@symfony/ux-react';
+// // start the Stimulus application
 import './bootstrap';
-import { createRoot } from 'react-dom/client';
-import React from 'react';
-import Article from './Components/Article';
-import Home from './Components/Home';
+// import { createRoot } from 'react-dom/client';
+// import React from 'react';
+// import Article from './Components/Article';
+// import Home from './react/controllers/Home';
 
-
-class App extends React.Component {
-     render() {
-         return <div>
-            <Home/>
-            <Article/>
-         </div>
-     }
- }
-const root = createRoot(document.getElementById('root'));
-root.render(<App/>);
+// class App extends React.Component {
+//      render() {
+//          return <div>
+//             <Home/>
+//             <Article/>
+//          </div>
+//      }
+//  }
+// const root = createRoot(document.getElementById('root'));
+// root.render(<App/>);
+import './react/components/PostComponent'
+registerReactControllerComponents(require.context('./react/pages', true, /\.(j|t)sx?$/));

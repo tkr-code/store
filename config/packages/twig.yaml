@@ -11,7 +11,7 @@ twig:
         categories: '@App\Twig\CategoryExtention'
         parentCategorys: '@App\Twig\CategoryParentExtention'
         gg_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
-        base: 'dev'
+        base: 'main'
         site:
             version: '1.0' 
             name: 'store'

@@ -11,8 +11,9 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <!-- CSS Libraries -->
+
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/lest/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/magnific-popup/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
@@ -62,11 +63,11 @@
     {% block foot %}{% endblock %}
         <!-- sweetalert2 -->
     <script type="application/javascript" src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
-    <script type="application/javascript" src="{{asset('js/admin.js') }}"></script>
+    {# <script type="application/javascript" src="{{asset('js/admin.js') }}"></script>
     <script src="{{asset('js/article.js') }}"></script>
     <script src="{{asset('js/store.js') }}"></script>
     <script src="{{asset('js/util.js') }}"></script>
-
+    #}
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>

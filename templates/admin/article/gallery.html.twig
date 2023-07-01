@@ -1,0 +1,41 @@
+{% extends "admin/base.html.twig" %}
+{% block head %}
+<!-- Ekko Lightbox -->
+<link rel="stylesheet" href="{{ asset('vendor/ekko-lightbox/ekko-lightbox.css') }}">
+{% endblock %}
+{% block foot %}
+<!-- Ekko Lightbox -->
+<script src="{{ asset('vendor/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+{% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox({
+                alwaysShowClose: true
+            });
+        });
+    })
+</script>
+{% endblock %}
+{% block body %}
+<div class="card card-primary">
+    <div class="card-header">
+        <h4 class="card-title">Gallerie images produits</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% for image in images %}
+            <div class="col-sm-2">
+                <a href="{{ asset('img/article/' ~ image.name) }}" data-toggle="lightbox"
+                    data-title="sample 1 - white" data-gallery="gallery">
+                    <img src="{{ asset('img/article/' ~ image.name) }}" class="img-fluid mb-2" alt="white sample">
+                </a>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

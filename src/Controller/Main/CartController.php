@@ -40,7 +40,7 @@ class CartController extends AbstractController
      */
     public function checkoutStore():Response
     {
-        return $this->render('leSekoya/cart/checkout.html.twig',[
+        return $this->render($this->getParameter('template').'/cart/checkout.html.twig',[
 
         ]);
     }
@@ -51,7 +51,7 @@ class CartController extends AbstractController
      */
     public function checkout():Response
     {
-        return $this->render('lest/cart/checkout.html.twig',[
+        return $this->render($this->getParameter('template').'/cart/checkout.html.twig',[
 
         ]);
     }
@@ -84,7 +84,7 @@ class CartController extends AbstractController
         //on recupere la methode de paiment
         // on recupere le total du panier
         //on gener la nouvelle commande avec le prix de la livraion
-        return $this->renderForm('lest/cart/order-step-1.html.twig',[
+        return $this->renderForm($this->getParameter('template').'/cart/order-step-1.html.twig',[
             'items'=>$this->cartService->getFullCart(),
             'subtotal'=>$this->cartService->getTotal(),
             'street'=>$street,
@@ -142,7 +142,7 @@ class CartController extends AbstractController
         $deliverySpace = new DeliverySpace();
         $formDeliverySpace = $this->createForm(DeliverySpaceType::class, $deliverySpace);
         $formDeliverySpace->handleRequest($request);
-        return $this->renderForm('leSekoya/cart/index.html.twig',[
+        return $this->renderForm($this->getParameter('template').'/cart/index.html.twig',[
             'items'=>$cartService->getFullCart(),
             'total'=>$cartService->getTotal(),
             'form'=>$form,
@@ -234,8 +234,8 @@ class CartController extends AbstractController
      */
     public function loadCart(){
         $reponse = [
-            'count'=>$this->render('lest/cart/ajax/count.html.twig')->getContent(),
-            'cart'=>$this->render('lest/cart/ajax/load.html.twig')->getContent()
+            'count'=>$this->render($this->getParameter('template').'/cart/ajax/count.html.twig')->getContent(),
+            'cart'=>$this->render($this->getParameter('template').'/cart/ajax/load.html.twig')->getContent()
         ];
         return new JsonResponse($reponse);
     }

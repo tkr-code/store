@@ -22,7 +22,7 @@ name:'Listes des articles'
 {% block body %}
 {% include "includes/_alerte.html.twig" %}
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-8">
 		<div class="row">
 			<div class="col-12">
 				<!-- Custom Tabs -->
@@ -37,6 +37,9 @@ name:'Listes des articles'
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#tab_2" data-toggle="tab">Caractéristiques</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#tab_3" data-toggle="tab">Aides</a>
 							</li>
 						</ul>
 					</div>
@@ -57,43 +60,43 @@ name:'Listes des articles'
 									<div class="col-12">
 										{{form_row(form.description)}}
 									</div>
-									<div class="col-lg-4">
+									{# <div class="col-lg-4">
 										{{form_row(form.buyingPrice)}}
 									</div>
 									<div class="col-lg-4">
 										{{form_row(form.price)}}
-									</div>
-									<div class="col-lg-4">
+									</div> #}
+									{# <div class="col-lg-4">
 										{{form_row(form.quantity)}}
 									</div>
 									<div class="col-lg-4">
 										{{form_row(form.qty_reel)}}
-									</div>
-									<div class="col-lg-4">
+									</div> #}
+									{# <div class="col-lg-4">
 										{{form_row(form.reduction)}}
-									</div>
-									<div class="col-lg-4">
+									</div> #}
+									{# <div class="col-lg-4">
 										{{form_row(form.category)}}
-									</div>
-									<div class="col-lg-4">
+									</div> #}
+									{# <div class="col-lg-4">
 										{{form_row(form.brand)}}
-									</div>
+									</div> #}
 									<div class="col-lg-4">
 										{{form_row(form.label)}}
 									</div>
-									<div class="col-lg-4 col-12">
+									{# <div class="col-lg-4 col-12">
 										{{form_row(form.etat)}}
-									</div>
-									<div class="col-lg-4 col-12">
+									</div> #}
+									{# <div class="col-lg-4 col-12">
 										{{form_row(form.status)}}
-									</div>
+									</div> #}
 									<div class="col-lg-4 col-12">
 										{{form_row(form.images)}}
 									</div>
 
-									<div class="col-lg-12 col-12">
+									{# <div class="col-lg-12 col-12">
 										{{form_row(form.enabled)}}
-									</div>
+									</div> #}
 									<div class="gallery">
 										<p class="text-center">Prévisualisez vos images</p>
 									</div>
@@ -135,7 +138,9 @@ name:'Listes des articles'
 								{% include "includes/article/article_option/table.html.twig" %}
 							</div>
 							<!-- /.tab-pane -->
-							<div class="tab-pane" id="tab_3"></div>
+							<div class="tab-pane" id="tab_3">
+								{% include "includes/article/aides.html.twig" %}
+							</div>
 							<!-- /.tab-pane -->
 						</div>
 						<!-- /.tab-content -->
@@ -176,18 +181,43 @@ name:'Listes des articles'
 					</div>
 					<div class="col-7 col-sm-9">
 						<div class="tab-content" id="vert-tabs-tabContent">
-							<div class="tab-pane text-left fade" id="vert-tabs-home" role="tabpanel"
+							<div class="tab-pane text-left fade" id="vert-tabs-general" role="tabpanel"
 								aria-labelledby="vert-tabs-general-tab">
-								General
+								Promotion
+								<div class="form-row">
+									<div class="form-group col-8">
+										<label for="article_reduction">Réduction</label>
+										<select class="custom-select" name="article_reduction" id="article_reduction">
+											<option selected>Select one</option>
+											<option value="10">10%</option>
+										</select>
+										<p>
+											<a href="#">
+												Programmer
+											</a>
+										</p>
+									</div>
+
+								</div>
 							</div>
 							<div class="tab-pane fade" id="vert-tabs-inventaire" role="tabpanel"
 								aria-labelledby="vert-tabs-inventaire-tab">
-								Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus
-								ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-								posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula
-								placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet
-								ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+								<form action="" method="post">
+									<div class="form-row">
+										<div class="form-group col-8">
+											<label for="article_price">Prix</label>
+											<input type="number" name="article_price" id="article_price"
+												class="form-control" placeholder="Prix de l'article"
+												value="{{ article.price }}" aria-describedby="helpId">
+										</div>
+										<div class="form-group col-4">
+											<label for="article_quantite">Quantité</label>
+											<input type="number" name="number" id="article_quantite"
+												class="form-control" placeholder="Quantité de l'article"
+												value="{{ article.quantity }}">
+										</div>
+									</div>
+								</form>
 							</div>
 							<div class="tab-pane fade" id="vert-tabs-expedition" role="tabpanel"
 								aria-labelledby="vert-tabs-expedition-tab">
@@ -221,15 +251,26 @@ name:'Listes des articles'
 			font-size: 12px;
 		}
 	</style>
-	<div class="col-md-3">
-		{% include "includes/article/aides.html.twig" %}
-		{# <div class="card callout callout-success">
-			<h5>
-				<i class="icon fas fa-exclamation-triangle"></i>
-				Publier
-			</h5>
+	<div class="col-md-4 font-secondary">
+		<div class="card card-outline card-success">
+			<div class="card-header">
+				<div class="card-title">
+					Publier
+				</div>
+				<div class="card-tools">
+					<button type="button" class="btn btn-tool" data-card-widget="collapse">
+						<i class="fas fa-minus"></i>
+					</button>
+				</div>
+			</div>
 			<div class="card-body font-secondary">
-				<p> <i class="fa fa-key" aria-hidden="true"></i> Etat : {{ article.status }} </p>
+				<p>
+					Activé : {{ article.enabled ? 'Oui':'Non' }} <a type="button" href="#">Modifier</a>
+				</p>
+				<p>
+					Etat : {{ article.status }} <a type="button" href="#">Modifier</a>
+				</p>
+				<p> <i class="fa fa-key" aria-hidden="true"></i> Etat : {{ article.etat }} </p>
 				<p> <i class="fa fa-calendar"></i> Publie le : {{ article.createdAt ? article.createdAt|date_format_fr
 					:'' }} <a type="button" href="#">Modifier</a></p>
 				<div>
@@ -237,7 +278,72 @@ name:'Listes des articles'
 				</div>
 			</div>
 
-		</div> #}
+		</div>
+
+		<div class="card card-outline card-success">
+			<div class="card-header">
+				<div class="card-title">Image produit</div>
+				<div class="card-tools">
+					<button type="button" class="btn btn-tool" data-card-widget="collapse">
+						<i class="fas fa-minus"></i>
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row gallery-2">
+					{% for image in article.images %}
+					<div class="col-lg-6 col-md-6 col-xs-6">
+						<img src="{{ asset('img/article/' ~ image.name)}}" class="zoom img-fluid " alt="">
+						<a class="btn btn-image-delete position-absolute btn-image-delete text-danger text-center"
+							href="{{ path('article_delete_image', {id: image.id}) }}" data-delete
+							data-token="{{ csrf_token('delete' ~ image.id) }}">
+							<i class="fa fa-window-close"></i>
+						</a>
+					</div>
+					{% else %}
+					<div class="col-md-12 col-12">
+						<p class="font-weight-bold text-center">L'article ne possède pas d'image</p>
+					</div>
+					{% endfor %}
+					
+				</div>
+				{% for image in article.images %}
+						<button class="btn btn-primary">Modifier</button>
+						{% else %}	
+						<button class="btn btn-primary">Choisir une photo dans la gallery</button>
+				{% endfor %}
+				<p class="pt-3">
+					<a href="#">
+						Ajouter une photo dans la galérie
+					</a>
+				</p>
+			</div>
+
+		</div>
+		<div class="card card-outline card-success">
+			<div class="card-header">
+				<div class="card-title">Catégorie</div>
+				<div class="card-tools">
+					<button type="button" class="btn btn-tool" data-card-widget="collapse">
+						<i class="fas fa-minus"></i>
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+			
+			{# <div {{ react_component('Category') }}></div> #}
+			<post-component></post-component>
+				<div class="form-group">
+					{% for item in categories.all() %}
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="category_produi">
+						<label class="form-check-label">{{ item.title }}</label>
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}

@@ -17,6 +17,15 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 
 class SecurityController extends AbstractController
 {
+    #[Route(path: '/api/login', name:'api_login', methods:['POST'])]
+    public function apiLogin(){
+        $user = $this->getUser();
+        return $this->json([
+            'username'=>$user->getUsername(),
+            'roles'=>$user->getRoles()
+
+        ]);
+    }
     /**
      * @Route("/login", name="app_login")
      */

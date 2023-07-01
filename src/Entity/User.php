@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\MeController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -16,6 +20,26 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
+#[ApiResource(
+    collectionOperations:[
+        'me'=>[
+            'pagination_enabled'=>false,
+            'path'=>'/me',
+            'method'=>'get',
+            'controller'=>MeController::class,
+            'read'=>false
+        ]
+    ],
+    itemOperations:[
+        'get'=>[
+            'controller'=>NotFoundAction::class,
+            'openapi_context'=>['summary'=>'hidden'],
+            'read'=>false,
+            'output'=>false
+        ]
+        ],
+        normalizationContext:['groups'=>['read:User']]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     const roles=[
@@ -34,18 +58,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(['read:User'])]
     private $id;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=180, unique=true)
      */
+    #[Groups(['read:User'])]
     private $email;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="json")
      */
+    #[Groups(['read:User'])]
     private $roles = [];
 
     /**

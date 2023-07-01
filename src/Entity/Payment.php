@@ -5,11 +5,13 @@ namespace App\Entity;
 use App\Repository\PaymentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 
 /**
  * @ORM\Entity(repositoryClass=PaymentRepository::class)
  */
+#[ApiResource()]
 class Payment
 {
     public function __construct()

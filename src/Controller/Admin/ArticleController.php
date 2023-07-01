@@ -13,6 +13,7 @@ use App\Repository\ArticleOptionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\BrandRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\ImageRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use function PHPUnit\Framework\fileExists;
@@ -63,6 +64,16 @@ class ArticleController extends AbstractController
             'articlesOn' => $articleRepository->findAllOn(),
             'articlesOff' => $articleRepository->findAllOff(),
             'articlesTop' => $articleRepository->findEtat('top'),
+            'parent_page' => $this->parent_page
+        ]);
+    }
+    /**
+     * @Route("/gallery", name="article_gallery", methods={"GET"})
+     */
+    public function gallery(ImageRepository $imageRepository): Response
+    {
+        return $this->render('admin/article/gallery.html.twig', [
+            'images'=>$imageRepository->findAll(),
             'parent_page' => $this->parent_page
         ]);
     }

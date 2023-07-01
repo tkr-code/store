@@ -51,7 +51,7 @@ class CategoryExtention extends AbstractExtension
 
     public function all()
     {
-        return $this->categoryRepositoty->findAll();
+        return $this->categoryRepository->findAll();
         
     }
    
